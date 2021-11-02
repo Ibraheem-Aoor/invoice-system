@@ -110,8 +110,9 @@ Auth::routes();
 
         Route::get('event' , function()
         {
-            // event(new NewUser('This is a test message'));
-            event(new NewUser('ASDASDAS'));
+         $users = User::with('roles')->where('name','super-admin')->get();
+            // $users->roles;
+            return $users;
         });
 Route::get('/{page}', 'Admin\AdminController@index');
 
