@@ -10,6 +10,7 @@ use App\User;
 use App\Http\Controllers\Reports\ClientsReports;
 use App\Notifications\NewUser as NotificationsNewUser;
 use Illuminate\Support\Facades\Notification;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,9 +111,11 @@ Auth::routes();
 
         Route::get('event' , function()
         {
-         $users = User::with('roles')->where('name','super-admin')->get();
-            // $users->roles;
-            return $users;
+            $users = User::with('roles')->get();
+             $rolesWithUsers = Role::with('users')->where('name' , 'super-admin')->get();
+            foreach($rolesWithUsers[0]->users as $i)
+                $i->notify(new NotificationsNewUser());
+
         });
 Route::get('/{page}', 'Admin\AdminController@index');
 

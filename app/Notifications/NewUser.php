@@ -66,8 +66,8 @@ class NewUser extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title' => '' ,
-            'body' => '' ,
+            'title' => 'تمت اضافة مستخدم جديد ' ,
+            'body' => 'اختبار ' ,
         ];
     }
 }
