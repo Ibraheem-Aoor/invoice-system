@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Section;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,5 +40,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-   
+    public function sections()
+    {
+        return $this->hasMany(Section::class , 'user_id');
+    }
+
 }

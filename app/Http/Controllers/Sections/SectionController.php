@@ -53,6 +53,7 @@ class SectionController extends Controller
         Section::create([
             'section_name' => $request->section_name,
             'discreption' => $request->description,
+            'user_id' => Auth::id(),
         ]);
         return redirect(url('/sections'))->with(['insertDone' => 'تم اضافة القسم بنجاح']);
     }

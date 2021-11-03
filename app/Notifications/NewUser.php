@@ -20,9 +20,17 @@ class NewUser extends Notification
      *
      * @return void
      */
-    public function __construct()
+
+    /* Start Attributes */
+        public $title ,
+                $body ,
+                $id; //for the user or the whatEver.
+    /* End Attributes */
+
+    public function __construct($info)
     {
-        //
+        $this->title = $info[0];
+        $this->body = 'انضم '.$info[1].' إالى قائمة المستخدمين لديك! ';
     }
 
     /**
@@ -62,12 +70,20 @@ class NewUser extends Notification
         -Each Notification have a title , body , and date to appear to the user
     */
 
+    public function toDatabase($notifiable)
+    {
+        return [
+            'title' => $this->title,
+            'body' => $this->body,
+            // 'id' => $this->id,
+        ];
+    }
+
 
     public function toArray($notifiable)
     {
         return [
-            'title' => 'تمت اضافة مستخدم جديد ' ,
-            'body' => 'اختبار ' ,
+
         ];
     }
 }

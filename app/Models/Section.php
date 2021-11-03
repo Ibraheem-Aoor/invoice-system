@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
+use App\User;
 
 class Section extends Model
 {
     protected $fillable = [
-        'section_name' , 'discreption' ,
+        'section_name' , 'discreption' , 'user_id'
     ];
 
 
@@ -16,6 +17,11 @@ class Section extends Model
         -Each section have multi products.
         -Each Section have multi invoices
     */
+
+    public function user()
+    {
+        return $this->belongsTo(User::class , 'user_id');
+    }
 
     public function products()
     {

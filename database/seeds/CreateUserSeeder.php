@@ -14,13 +14,12 @@ class CreateUserSeeder extends Seeder
     {
         $user = User::create([
         'name' => 'IbraheemDev',
-        'email' => 'admin',
-        'roles_name' =>   ["super-admin"], //This how sptie package will recognize to
+        'email' => 'admin@admin',
         'status' =>  1 ,//active
         'password' => bcrypt('admin')
         ]);
 
-        $role = Role::create(['name' => 'super-admin']);
+        $role = Role::create(['name' => 'owner']);
 
         $permissions = Permission::pluck('id','id')->all();
 

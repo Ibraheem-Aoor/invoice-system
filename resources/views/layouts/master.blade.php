@@ -33,7 +33,7 @@
             @yield('page-header')
             @yield('content')
             @auth
-            @include('layouts.sidebar')
+            {{-- @include('layouts.sidebar') --}}
             @endauth
             @include('layouts.models')
             @include('layouts.footer')

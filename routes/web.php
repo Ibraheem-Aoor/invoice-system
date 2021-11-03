@@ -106,18 +106,19 @@ Auth::routes();
         Route::get('account.active/{id}','UserController@activateAccount')->name('account.active');
     });
 
+    /* Start Notifications Rotues */
+    Route::namespace('Notifications')->group(function()
+    {
+        Route::get('mark-all/{flag?}' , 'NotificationsController@markAllasRead')->name('markAllasRead');
+    });
+    /* Start Notifications Rotues */
 
     // Testing real notifications
-
-        Route::get('event' , function()
+    Route::get('event' , function()
         {
-            $users = User::with('roles')->get();
-             $rolesWithUsers = Role::with('users')->where('name' , 'super-admin')->get();
-            foreach($rolesWithUsers[0]->users as $i)
-                $i->notify(new NotificationsNewUser());
-
+            $users = User::with('sections')->get();
         });
-Route::get('/{page}', 'Admin\AdminController@index');
+        Route::get('/{page}', 'Admin\AdminController@index');
 
 
 

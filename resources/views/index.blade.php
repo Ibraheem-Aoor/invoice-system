@@ -57,15 +57,22 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class=" tx-20 font-weight-bold mb-1 text-white" id="inPaidAmount">
-                                    {{ \App\Models\Invoices::where('Status', 2)->sum('Total') }}</h4>
+
+                                    {{ \App\Models\Invoices::where('Status', 2)->sum('Total') }}
+                                </h4>
+
                                 <p class="mb-0 tx-12 text-white op-7" id="inPaid">
-                                    {{ \App\Models\Invoices::count() }}
+                                    {{ \App\Models\Invoices::where('Status', 2)->count() }}
                                 </p>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-down text-white"></i>
                                 <span class="text-white op-7">
-                                    {{ (\App\Models\Invoices::where('Status', 2)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                    @if (\App\Models\Invoices::count() == 0)
+                                        0%
+                                    @else
+                                        {{ (\App\Models\Invoices::where('Status', 2)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                    @endif
                                 </span>
                             </span>
                         </div>
@@ -91,7 +98,11 @@
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
                                 <span class="text-white op-7">
-                                    {{ (\App\Models\Invoices::where('Status', 0)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                    @if (\App\Models\Invoices::count() == 0)
+                                        {{ 0 }}
+                                    @else
+                                        {{ (\App\Models\Invoices::where('Status', 0)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                    @endif
                                 </span>
                             </span>
                         </div>
@@ -118,7 +129,11 @@
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-down text-white"></i>
                                 <span class="text-white op-7">
-                                    {{ (\App\Models\Invoices::where('Status', 1)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                    @if (\App\Models\Invoices::count() == 0)
+                                        {{ 0 }}
+                                    @else
+                                        {{ (\App\Models\Invoices::where('Status', 1)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                    @endif
                                 </span>
                             </span>
                         </div>

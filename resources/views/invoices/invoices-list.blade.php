@@ -41,10 +41,11 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
-                    <a class="btn btn-outline-primary" href="{{ route('invoice.add') }}" style="width:20%"
-                        class="mb-1">اضافة فاتورة</a>
-                    <a class="btn btn-outline-primary" href="{{ route('invoice.getExcel') }}" style="width:20%">طباعة
-                        اكسل</a>
+                    <hr>
+                        <a class="btn btn-outline-primary" href="{{ route('invoice.add') }}" style="width:20%"
+                            class="mb-1">اضافة فاتورة</a> <hr>
+                        <a class="btn btn-outline-primary" href="{{ route('invoice.getExcel') }}" style="width:20%">طباعة
+                            اكسل</a>
                     <div class="card-body">
                         <div class="table-responsive">
                             <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -261,6 +262,6 @@
     </script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-   
+
 
 @endsection
