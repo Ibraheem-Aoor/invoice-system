@@ -26,30 +26,33 @@ class InvoicesReports extends Controller
 
         $invoices = $request->radio == 2 ? $this->searchByNumber($request) : $this->searchByDate($request);
         if($invoices->count() == 0 || $invoices == null)
-            return view('reports.invoices-reports' )->with(['empty' => 'لم يتم العثور على نتائج']);
+        {
+            session()->flash('empty' , 'لم يتم العثور على نتائج');
+            return view('reports.invoices-reports' );
+        }
         return view('reports.invoices-reports' ,compact('invoices' , 'type'));
         }
 
     public function searchByNumber($request)
     {
-        return Invoices::where('invoice_number' , $request->invoice_number)->get();
+        return Invoices::where('invoice_number' , $request->invoice_number)->with('section')->get();
     }
 
     public function searchByDate($request)
     {
         $startAt = date($request->start_at);
         $endAt = date($request->end_at);
-        $type = $request->type;
+        $type = $request->type;//numeric
         if($startAt == null && $endAt != null)
-            return Invoices::where(['Due_date' => $endAt , 'Status' =>$type])->get();
+            return Invoices::where(['Due_date' => $endAt , 'Status' =>$type])->with('section')->get();
         elseif($startAt != null && $endAt == null)
-            return Invoices::where(['invoice_Date' => $startAt , 'Status' =>$type])->get();
+            return Invoices::where(['invoice_Date' => $startAt , 'Status' =>$type])->with('section')->get();
         elseif($startAt == null && $endAt == null)
-            return Invoices::where('Status' , $type)->get();
+            return Invoices::where('Status' , $type)->with('section')->get();
         elseif($startAt != null && $endAt != null && $type == null)
-            return Invoices::whereBetween('invoice_Date' , [$startAt , $endAt])->get();
+            return Invoices::whereBetween('invoice_Date' , [$startAt , $endAt])->with('section')->get();
 
-        return Invoices::whereBetween('invoice_Date' , [$startAt , $endAt])->where('Status' , $request->type)->get();
+        return Invoices::whereBetween('invoice_Date' , [$startAt , $endAt])->with('section')->where('Status' , $request->type)->get();
     }
 
 }//End Class

@@ -77,7 +77,7 @@ class InvoicesController extends Controller
     public function show()
     {
 
-        $sections = Section::get();
+        $sections = Section::where('user_id' , Auth::id())->get();
         return view('invoices.add-invoice', compact('sections'));
     }
 
@@ -114,7 +114,7 @@ class InvoicesController extends Controller
         }
         $this->updateInvoiceTable($request , $invoice , 2);
         $invoiceDeatilesArray = InvoiceDetails::where('id_Invoice' , $id)->get();//the invoice might have multiple detailes recoreds
-        $this->updateInvoiceDetailesTable($request , $invoiceDeatilesArray , $request->oldInvoiceNumber);
+        $this->updateInvoiceDetailesTable($request , $invoiceDeatilesArray , $request->old_invoice_number);
         session()->flash('Add', 'تم تعديل الفاتورة بنجاح');
         return redirect()->back();
     }
@@ -153,6 +153,7 @@ class InvoicesController extends Controller
             'Total' => $request->Total,
             'note' => $request->note,
             'Status' => 2,
+            'user_id' => Auth::id(),
         ]);
     }
 
@@ -217,7 +218,7 @@ class InvoicesController extends Controller
                 'user' => Auth::user()->name,
             ]);
         }
-//    $this->updaeInvoiceAttachmentfileName($request->invoice_number , $old_invoice_number);
+        $this->updaeInvoiceAttachmentfileName($request->invoice_number , $old_invoice_number  , true);
     }
 
 
@@ -236,13 +237,15 @@ class InvoicesController extends Controller
 
 
 
-    /*
-     * Not Working !!
+
     public function updaeInvoiceAttachmentfileName($newInvoiceNumber , $old_invoice_number)
     {
-        Storage::disk('public_uploads')->move('/'.$old_invoice_number , '/'.$newInvoiceNumber);
+        $targetInvoice = InvoiceAttachments::where('invoice_number'  , $old_invoice_number)->update([
+            'invoice_number' => $newInvoiceNumber,
+        ]);
+        Storage::disk('public_uploads')->move($old_invoice_number , $newInvoiceNumber);
     }
-    */
+
     /* End Update Methods */
 
 //for ajax request

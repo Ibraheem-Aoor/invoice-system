@@ -23,6 +23,11 @@ class Invoices extends Model
     {
         return $this->belongsTo(Section::class , 'section_id');
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class , 'user_id');
+    }
 
     public function detailes()
     {

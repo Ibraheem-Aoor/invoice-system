@@ -164,11 +164,11 @@
                         {{-- 5 --}}
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="status">حالة الدفع</label>
+                                <label for="status" id="status">حالة الدفع</label>
                                 <select class="form-control" name="status">
-                                    <option selected>-- اختيار حالة الدفع --</option>
+                                    <option  selected>-- اختيار حالة الدفع --</option>
                                     <option value="2">غير مدفوعة</option>
-                                    <option value="1">مدفوعة جزئيا</option>
+                                    <option value="1" onclick="myFunc()">مدفوعة جزئيا</option>
                                     <option value="0">مدفوعة</option>
                                 </select>
                             </div>
@@ -224,6 +224,11 @@
         var date = $('.fc-datepicker').datepicker({
             dateFormat: 'yy-mm-dd'
         }).val();
+
+        function myFunc()
+        {
+            alert('adasd');
+        }
     </script>
 
 

@@ -83,13 +83,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $rolesWithUsers = Role::with('users')->where('name' , 'owner')->get();
-        foreach($rolesWithUsers[0]->users as $i) //index = 0 becuase there is only one role with a super-amdin name.
+        foreach($rolesWithUsers[0]->users as $i) //index = 0 becuase there is only one role with a owner name.
             $i->notify(new NewUser(array('تمت إضافة مستخدم جديد', $data['name'])));
+        $defaultRole = Role::where('name' , 'default-user')->first();
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
+        ])->assignRole([$defaultRole->id]);
 
     }
 

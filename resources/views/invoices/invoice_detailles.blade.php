@@ -200,27 +200,28 @@
                                         <div class="tab-pane" id="tab6">
                                             <!--المرفقات-->
                                             <div class="card card-statistics">
-
-                                                <div class="card-body">
-                                                    <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                                    <h5 class="card-title">اضافة مرفقات</h5>
-                                                    <form method="post" action="{{ route('attachment.store') }}"
-                                                        enctype="multipart/form-data">
-                                                        {{ csrf_field() }}
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="customFile"
-                                                                name="file" required>
-                                                            <input type="hidden" id="customFile" name="invoice_number"
-                                                                value="{{ $invoice->invoice_number }}">
-                                                            <input type="hidden" id="invoice_id" name="invoice_id"
-                                                                value="{{ $invoice->id }}">
-                                                            <label class="custom-file-label" for="customFile">حدد
-                                                                المرفق</label>
-                                                        </div><br><br>
-                                                        <button type="submit" class="btn btn-primary btn-sm "
-                                                            name="uploadedFile">تاكيد</button>
-                                                    </form>
-                                                </div>
+                                                @can('اضافة مرفق')
+                                                    <div class="card-body">
+                                                        <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                                                        <h5 class="card-title">اضافة مرفقات</h5>
+                                                        <form method="post" action="{{ route('attachment.store') }}"
+                                                            enctype="multipart/form-data">
+                                                            {{ csrf_field() }}
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" id="customFile"
+                                                                    name="file" required>
+                                                                <input type="hidden" id="customFile" name="invoice_number"
+                                                                    value="{{ $invoice->invoice_number }}">
+                                                                <input type="hidden" id="invoice_id" name="invoice_id"
+                                                                    value="{{ $invoice->id }}">
+                                                                <label class="custom-file-label" for="customFile">حدد
+                                                                    المرفق</label>
+                                                            </div><br><br>
+                                                            <button type="submit" class="btn btn-primary btn-sm "
+                                                                name="uploadedFile">تاكيد</button>
+                                                        </form>
+                                                    </div>
+                                                @endcan
 
                                                 <br>
 
@@ -258,14 +259,14 @@
                                                                                     class="fas fa-download"></i>&nbsp;
                                                                                 تحميل</a>
 
-
-                                                                            <button class="btn btn-outline-danger btn-sm"
-                                                                                data-toggle="modal"
-                                                                                data-file_name="{{ $attachment->file_name }}"
-                                                                                data-invoice_number="{{ $attachment->invoice_number }}"
-                                                                                data-id_file="{{ $attachment->id }}"
-                                                                                data-target="#delete_file">حذف</button>
-
+                                                                            @can('حذف المرفق')
+                                                                                <button class="btn btn-outline-danger btn-sm"
+                                                                                    data-toggle="modal"
+                                                                                    data-file_name="{{ $attachment->file_name }}"
+                                                                                    data-invoice_number="{{ $attachment->invoice_number }}"
+                                                                                    data-id_file="{{ $attachment->id }}"
+                                                                                    data-target="#delete_file">حذف</button>
+                                                                            @endcan
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -313,7 +314,7 @@
                         </p>
 
                         <input type="hidden" name="id_file" id="id_file" value="">
-                        <input name="file_name" id="file_name" value="" readonly>
+                        <input name="file_name" id="file_name" readonly style="border: none">
                         <input type="hidden" name="invoice_number" id="invoice_number" value="">
 
                     </div>

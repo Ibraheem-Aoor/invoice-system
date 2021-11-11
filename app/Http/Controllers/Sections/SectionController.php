@@ -26,7 +26,7 @@ class SectionController extends Controller
 
     public function index()
     {
-        $section = Section::all();
+        $section = Section::where('user_id' , Auth::id())->get();
         // return $section;
         return view('sections.sections',compact('section'));
     }

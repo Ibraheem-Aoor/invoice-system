@@ -115,12 +115,12 @@ class InvocieDetailes extends Controller
 
     public function InvoicesNotPaid()
     {
-         $invoices = Invoices::where('Status' , 2)->get();
+         $invoices = Invoices::where('Status' , 2)->with('section')->get();
          return view('invoices.invoices-paid-2' , compact('invoices'));
     }
     public function InvoicestFullyPaid()
     {
-         $invoices = Invoices::where('Status' , 0)->get();
+         $invoices = Invoices::where('Status' , 0)->with('section')->get();
          return view('invoices.invoices-paid-0' , compact('invoices'));
     }
 

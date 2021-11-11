@@ -7,13 +7,19 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\NewUserByAdmin;
+use App\Notifications\NewUser;
 class UserController extends Controller
 {//start class
 
     public function __construct()
     {
-        $this->middleware('permission:المستخدمين|قائمة المستخدمين| |', ['only' => ['index']]);
-        $this->middleware('permission:تعديل مستخدم |', ['only' => ['edit' , 'update']]);
+        $this->middleware('permission:المستخدمين|قائمة المستخدمين', ['only' => ['index','store']]);
+        $this->middleware('permission:اضافة مستخدم', ['only' => ['create','store']]);
+        $this->middleware('permission:تعديل مستخدم', ['only' => ['edit','update']]);
+        $this->middleware('permission:حذف مستخدم', ['only' => ['destroy']]);
+        $this->middleware('permission: تفعيل مستخدم', ['only' => ['activateAccount']]);
+        $this->middleware('permission: تعطيل مستخدم', ['only' => ['disableAccount']]);
     }
 
     public function index(Request $request)
@@ -26,25 +32,21 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         return view('users.create',compact('roles'));
     }
-    public function store(Request $request)
+    public function store(NewUserByAdmin $request)
     {
-        $this->validate($request, [
-        'name' => 'required',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|same:confirm-password',
-        'roles_name' => 'required'
-        ]);
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $user->assignRole($request->input('roles_name'));
+        $this->notifyAdmin($input['name']);
         return redirect()->route('users.index')
-        ->with('success','User created successfully');
+        ->with('Add','تم إنشاء المستخدم بنجاح');
     }
     public function show($id)
     {
-        // $user = User::find($id);
-         return view('users.show');
+        User::find($id)->delete();
+        return redirect()->route('users.index')
+        ->with('delete','تم حذف المستخدم بنجاح');
     }
     public function edit($id)
     {
@@ -59,27 +61,24 @@ class UserController extends Controller
         'name' => 'required',
         'email' => 'required|email|unique:users,email,'.$id,
         'password' => 'same:confirm-password',
-        'roles_name' => 'required'
+        'roles_name' => 'required',
+        'status' => 'required',
         ]);
-        $input = $request->all();
-        if(!empty($input['password'])){
-        $input['password'] = Hash::make($input['password']);
-        }else{
-        $input = array_except($input,array('password'));
-        }
+        $input = $request->all();   
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole($request->input('roles_name'));//model has roles
         return redirect()->route('users.index')
-        ->with('success','User updated successfully');
+        ->with('edit','تم تعديل المستخدم بنجاح');
     }
-    public function destroy($id)
-    {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-        ->with('success','User deleted successfully');
-    }
+    // public function destroy($id)
+    // {
+    //     return dd($id);
+    //     User::find($id)->delete();
+    //     return redirect()->route('users.index')
+    //     ->with('success','تم حذف المستخدم بنجاح');
+    // }
 
     public function disableAccount($id)
     {
@@ -97,5 +96,11 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function notifyAdmin($name)
+    {
+        $rolesWithUsers = Role::with('users')->where('name' , 'owner')->get();
+        foreach($rolesWithUsers[0]->users as $i) //index = 0 becuase there is only one role with a owner name.
+            $i->notify(new NewUser(array('تمت إضافة مستخدم جديد', $name)));
+    }
 
 }//End Class

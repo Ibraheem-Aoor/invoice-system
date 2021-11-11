@@ -44,14 +44,14 @@
             @endforeach
         </ul>
     </div>
-    @elseif(Session::has('empty'))
+@endif
+@if (session()->has('empty'))
     <div class="alert alert-danger">
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
-        <strong>{{Session::get('empty')}}</strong>
+        <strong>{{ session()->get('empty') }}</strong>
     </div>
-
 @endif
 
 <!-- row -->
@@ -63,7 +63,7 @@
 
             <div class="card-header pb-0">
 
-                <form action="{{route('invoice.search')}}" method="post" role="search" autocomplete="off">
+                <form action="{{ route('invoice.search') }}" method="post" role="search" autocomplete="off">
                     {{ csrf_field() }}
 
 
@@ -82,8 +82,8 @@
                     <div class="row">
 
                         <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="type">
-                            <p class="mg-b-10">تحديد نوع الفواتير</p><select class="form-control select2" name="type"
-                                required>
+                            <p class="mg-b-10">تحديد نوع الفواتير</p><select class="form-control select2"
+                                name="type" required>
                                 <option value="{{ $type ?? 'حدد نوع الفواتير' }}" selected>
                                     {{ $type ?? 'حدد نوع الفواتير' }}
                                 </option>
@@ -124,7 +124,7 @@
 
                     <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="invoice_number">
                         <p class="mg-b-10">البحث برقم الفاتورة</p>
-                        <input type="text" class="form-control" id="invoice_number" name="invoice_number" >
+                        <input type="text" class="form-control" id="invoice_number" name="invoice_number">
 
                     </div><!-- col-4 -->
 
@@ -160,33 +160,35 @@
                             <tbody>
                                 <?php $i = 0; ?>
                                 @foreach ($invoices as $invoice)
-                                    <?php $i++; ?>
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $invoice->invoice_number }} </td>
-                                        <td>{{ $invoice->invoice_Date }}</td>
-                                        <td>{{ $invoice->Due_date }}</td>
-                                        <td>{{ $invoice->product }}</td>
-                                        <td><a
-                                                href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
-                                        </td>
-                                        <td>{{ $invoice->Discount }}</td>
-                                        <td>{{ $invoice->Rate_VAT }}</td>
-                                        <td>{{ $invoice->Value_VAT }}</td>
-                                        <td>{{ $invoice->Total }}</td>
-                                        <td>
-                                            @if ($invoice->Status == 0)
-                                                <span class="text-success">مدفوعة</span>
-                                            @elseif($invoice->Status == 2)
-                                                <span class="text-danger">غير مدفوعة</span>
-                                            @else
-                                                <span class="text-warning">مدفوعة جزئيا</span>
-                                            @endif
+                                    @if ($invoice->section->user_id == Auth::id())
+                                        <?php $i++; ?>
+                                        <tr>
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $invoice->invoice_number }} </td>
+                                            <td>{{ $invoice->invoice_Date }}</td>
+                                            <td>{{ $invoice->Due_date }}</td>
+                                            <td>{{ $invoice->product }}</td>
+                                            <td><a
+                                                    href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
+                                            </td>
+                                            <td>{{ $invoice->Discount }}</td>
+                                            <td>{{ $invoice->Rate_VAT }}</td>
+                                            <td>{{ $invoice->Value_VAT }}</td>
+                                            <td>{{ $invoice->Total }}</td>
+                                            <td>
+                                                @if ($invoice->Status == 0)
+                                                    <span class="text-success">مدفوعة</span>
+                                                @elseif($invoice->Status == 2)
+                                                    <span class="text-danger">غير مدفوعة</span>
+                                                @else
+                                                    <span class="text-warning">مدفوعة جزئيا</span>
+                                                @endif
 
-                                        </td>
+                                            </td>
 
-                                        <td>{{ $invoice->note }}</td>
-                                    </tr>
+                                            <td>{{ $invoice->note }}</td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -246,7 +248,6 @@
     var date = $('.fc-datepicker').datepicker({
         dateFormat: 'yy-mm-dd'
     }).val();
-
 </script>
 
 <script>
@@ -268,7 +269,6 @@
             }
         });
     });
-
 </script>
 
 

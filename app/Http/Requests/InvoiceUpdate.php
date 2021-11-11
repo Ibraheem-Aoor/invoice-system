@@ -28,7 +28,7 @@ class InvoiceUpdate extends FormRequest
     public function rules()
     {
             return [
-                 'invoice_number' => 'required|numeric|digits_between:1,6|',
+                 'invoice_number' => 'required|numeric|digits_between:1,8|',
                  'invoice_Date' => 'required|date',
                  'Due_date' => 'required|date',
                  'Section' => 'required|string',

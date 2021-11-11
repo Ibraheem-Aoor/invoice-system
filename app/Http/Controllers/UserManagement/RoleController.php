@@ -6,14 +6,18 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\RoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
+use Illuminate\Support\Facades\Validator;
+
 class RoleController extends Controller
 {//start class
     function __construct()
     {
-        // $this->middleware('permission:المستخدمين|قائمة المستخدمين|صلاحيات المستخدمين|', ['only' => ['index','store']]);
-        // $this->middleware('permission:role-create', ['only' => ['create','store']]);
-        // $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-        // $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:المستخدمين|قائمة المستخدمين|صلاحيات المستخدمين|', ['only' => ['index','store']]);
+        $this->middleware('permission:اضافة صلاحية|', ['only' => ['create','store']]);
+        $this->middleware('permission:تعديل صلاحية', ['only' => ['edit','update']]);
+        $this->middleware('permission:حذف صلاحية', ['only' => ['destroy']]);
     }
     public function index(Request $request)
     {
@@ -25,16 +29,12 @@ class RoleController extends Controller
         $permission = Permission::get();
         return view('roles.create',compact('permission'));
     }
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $this->validate($request, [
-        'name' => 'required|unique:roles,name',
-        'permission' => 'required',
-        ]);
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission')); //many to many
         return redirect()->route('roles.index')
-        ->with('success','Role created successfully');
+        ->with('Add','تم انشاء الصلاحية بنجاح');
     }
     public function show($id)
     {
@@ -53,26 +53,25 @@ class RoleController extends Controller
         ->all();
         return view('roles.edit',compact('role','permission','rolePermissions'));
     }
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
-        $this->validate($request, [
-        'name' => 'required',
-        'permission' => 'required',
-        ]);
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
         $role->syncPermissions($request->input('permission'));
         return redirect()->route('roles.index')
-        ->with('success','Role updated successfully');
+        ->with('edit','تم تعديل الصلاحية بنجاح');
     }
     public function destroy($id)
     {
 
         DB::table("roles")->where('id',$id)->delete();
         return redirect()->route('roles.index')
-        ->with('success','Role deleted successfully');
+        ->with('delete','تم حذف الصلاحية بنجاح');
     }
 
+
+
+    
 
 }//End class

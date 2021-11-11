@@ -1,15 +1,15 @@
 @extends('layouts.master2')
 
 @section('title')
-    تسجيل الدخول - مورا سوفت للادارة القانونية
+    تسجيل الدخول-ادارة الفواتير
 @stop
-
 
 @section('css')
     <!-- Sidemenu-respoansive-tabs css -->
     <link href="{{ URL::asset('assets/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css') }}"
         rel="stylesheet">
 @endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row no-gutter">
@@ -17,9 +17,11 @@
             <!-- The content half -->
             <div class="col-md-6 col-lg-6 col-xl-5 bg-white">
                 <div class="login d-flex align-items-center py-2">
+
                     <!-- Demo content-->
                     <div class="container p-0">
                         <div class="row">
+
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                 <div class="card-sigin">
                                     <div class="mb-5 d-flex"> <a href="{{ url('/' . ($page = 'index')) }}"><img
@@ -28,6 +30,15 @@
                                         <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Ibraheem<span>D</span>ev</h1>
                                     </div>
                                     <div class="card-sigin">
+                                        @if (Session::has('AccountDisabled'))
+                                            <div class="alert alert-danger mg-b-0" role="alert">
+                                                <button aria-label="Close" class="close" data-dismiss="alert"
+                                                    type="button">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>خطأ </strong>&nbsp; {{Session::get('AccountDisabled')}}
+                                            </div>
+                                        @endif
                                         <div class="main-signup-header">
                                             <h2>مرحبا بك</h2>
                                             <h5 class="font-weight-semibold mb-4"> تسجيل الدخول</h5>
@@ -74,9 +85,11 @@
                                                     <div class="form-group row">
                                                         <div class="col-md-6 offset-md-4">
                                                             <div class="form-check">
-                                                                <a href="{{route('password.request')}}">نسيت كلمة المرور؟‍</a>
+                                                                <a href="{{ route('password.request') }}">نسيت كلمة
+                                                                    المرور؟‍</a>
                                                                 <div dir="rtl" class="main-signup-footer mt-3">
-                                                                    <p>لا تملك حساب ؟<a href="{{route('register')}}"> انشاء حساب </a></p>
+                                                                    <p>لا تملك حساب ؟<a href="{{ route('register') }}">
+                                                                            انشاء حساب </a></p>
                                                                 </div>
                                                             </div>
                                                         </div>

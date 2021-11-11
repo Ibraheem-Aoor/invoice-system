@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    المستخدمين - مورا سوفت للادارة الفواتير
+    المستخدمين
 @stop
 
 <!-- Internal Data table css -->
@@ -31,15 +31,37 @@
 
 @section('content')
 
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@elseif(session('disabled'))
-    <div class="alert alert-warning">
-        {{ session('disabled') }}
-    </div>
+@if (session()->has('Add'))
+    <script>
+        window.onload = function() {
+            notif({
+                msg: " تم اضافة المتسخدم بنجاح",
+                type: "success"
+            });
+        }
+    </script>
+@endif
 
+@if (session()->has('edit'))
+    <script>
+        window.onload = function() {
+            notif({
+                msg: " تم تحديث بيانات المتسخدم بنجاح",
+                type: "success"
+            });
+        }
+    </script>
+@endif
+
+@if (session()->has('delete'))
+    <script>
+        window.onload = function() {
+            notif({
+                msg: " تم حذف المتسخدم بنجاح",
+                type: "error"
+            });
+        }
+    </script>
 @endif
 
 <!-- row opened -->
@@ -94,27 +116,44 @@
 
                                     </td>
 
-                                    <td>
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info"
-                                            title="تعديل"><i class="las la-pen"></i></a>
-
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                            data-user_id="{{ $user->id }}" data-username="{{ $user->name }}"
-                                            data-toggle="modal" href="#modaldemo8" title="حذف"><i
-                                                class="las la-trash"></i></a>
-                                        @if ($user->status == 1)
-
-                                            <a href="{{ route('account.disable', $user->id) }}" title="تعطيل الحساب">
-                                                <i class="fas fa-ban" style="color: orange"></i>
-                                            </a>
-
-                                        @else
-                                        <a href="{{ route('account.active', $user->id) }}" class="btn btn-sm btn-info"
-                                            title="تفعيل"><i class="far fa-check-circle"></i></a>
+                                    <td style="text-align: center;vertical-align:center">
+                                        <div class="dropdown" style="margin-right: 2%">
+                                            <button aria-expanded="false" aria-haspopup="true"
+                                                class="btn ripple btn-primary" data-toggle="dropdown"
+                                                id="dropdownMenuButton" type="button" style="font-size: 20px">عمليات<i
+                                                    class="fas fa-caret-down ml-1"></i></button>
+                                            <div class="dropdown-menu tx-18">
+                                                @can('تعديل مستخدم')
+                                                    <a href="{{ route('users.edit', $user->id) }}"
+                                                        class=" btn btn-sm btn-info" title="تعديل"><i
+                                                            class="las la-pen"></i>تعديل</a>
+                                                @endcan
 
 
-                                    @endif
+                                                @can('حذف مستخدم')
+                                                    <a class=" btn btn-sm btn-danger"
+                                                        href="{{ route('users.destroy', $user->id) }}" title="حذف"><i
+                                                            class="las la-trash"></i>
+                                                        حذف</a>
+                                                @endcan
 
+                                                @if ($user->status == 1)
+                                                    @can('تفعيل مستخدم')
+                                                        <a href="{{ route('account.disable', $user->id) }} "
+                                                            title="تعطيل الحساب">
+                                                            <i class="fas fa-ban" style="color: orange"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                @else
+                                                    @can('تعطيل مستخدم')
+                                                        <a href="{{ route('account.active', $user->id) }}"
+                                                            class="btn btn-sm btn-info" title="تفعيل"><i
+                                                                class="far fa-check-circle"></i></a>
+                                                    @endcan
+                                                @endif
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -127,14 +166,14 @@
     <!--/div-->
 
     <!-- Modal effects -->
-    <div class="modal" id="modaldemo8">
+    {{-- <div class="modal" id="modaldemo8">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
                     <h6 class="modal-title">حذف المستخدم</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form action="{{ route('users.destroy', 'test') }}" method="post">
+                <form action="#" method="post">
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
@@ -149,7 +188,7 @@
             </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 </div>
@@ -178,7 +217,7 @@
 <!-- Internal Modal js-->
 <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
-<script>
+{{-- <script>
     $('#modaldemo8').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
         var user_id = button.data('user_id')
@@ -187,7 +226,7 @@
         modal.find('.modal-body #user_id').val(user_id);
         modal.find('.modal-body #username').val(username);
     })
-</script>
+</script> --}}
 
 
 @endsection

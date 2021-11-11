@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Section;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $sections = Section::with('products')->get();
+        $sections = Section::where('user_id' , Auth::id())->with('products')->get();
         foreach($sections as $i)
         {
             $i->makeHidden(['description']);

@@ -3,7 +3,7 @@
 <!-- Internal Nice-select css  -->
 <link href="{{URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" />
 @section('title')
-اضافة مستخدم - مورا سوفت للادارة القانونية
+اضافة مستخدم - برنامج الفواتير
 @stop
 
 
@@ -126,6 +126,7 @@
 
 <!--Internal  Parsley.min js -->
 <script src="{{URL::asset('assets/plugins/parsleyjs/parsley.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/parsleyjs/i18n/ar.js')}}"></script>
 <!-- Internal Form-validation js -->
 <script src="{{URL::asset('assets/js/form-validation.js')}}"></script>
 @endsection

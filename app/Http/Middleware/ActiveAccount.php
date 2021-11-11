@@ -2,9 +2,10 @@
 
 namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Auth;
+
 use Closure;
 
-class Activated
+class ActiveAccount
 {
     /**
      * Handle an incoming request.
@@ -15,8 +16,8 @@ class Activated
      */
     public function handle($request, Closure $next)
     {
-        if(Auth()->user()->status != 1)
-            return redirect(url('login'));
+        // if(auth()->user()->status == 0)
+            // return redirect(url('login'))->with(['AccountDisabled'=>'تم تعطيل حسابك بواسطة المشرف']);
         return $next($request);
     }
 }

@@ -32,7 +32,6 @@
         </div>
         <ul class="side-menu">
             <li class="side-item side-item-category">برنامج الفواتير</li>
-
             <li class="slide">
                 <a class="side-menu__item" href="{{ url('/' . ($page = 'index')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -103,7 +102,8 @@
                         </svg><span class="side-menu__label">التقارير</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         @can('تقرير الفواتير')
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'invoices-reoprts')) }}">تقارير الفواتير</a></li>
+                            <li><a class="slide-item" href="{{ url('/' . ($page = 'invoices-reoprts')) }}">تقارير
+                                    الفواتير</a></li>
                         @endcan
 
                         @can('تقرير العملاء')

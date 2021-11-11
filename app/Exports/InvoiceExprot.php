@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithFormatData;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Section;
 class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
     WithStyles , WithStrictNullComparison , WithFormatData
 {//start class
@@ -39,8 +41,8 @@ class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
 
     public function collection()
     {
-       $invoices = Invoices::all();
-       $invoices->makeHidden(['id' , 'note']);
-       return $invoices;
+       $sections = Section::where('user_id' , Auth::id())->get();
+       $sections->makeHidden(['id' , 'section_name' , 'discreption' ]);
+       return $sections->invoices->makeHidden(['id' , 'note']);
     }
 }//End Class

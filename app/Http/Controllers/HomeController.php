@@ -28,17 +28,47 @@ class HomeController extends Controller
 
     public function index()
     {
-        $numberOfInvoices = Invoices::count();
-        $numberOfPaidInvoices = Invoices::where('Status' , 0)->count();
-        $paidRate = $numberOfPaidInvoices/$numberOfInvoices * 100;
 
-        $numberOfInPaidInvoices = Invoices::where('Status' , 2)->count();
-        $inpaidRate = $numberOfInPaidInvoices/$numberOfInvoices * 100;
+        // total invoices
+        $invoicesCount  = Invoices::where('user_id' , Auth::id())->count();
+        $invoicesTotal  = Invoices::where('user_id' , Auth::id())->sum('Total');
+        $invoicesCount = $invoicesCount == 0 ? 1: $invoicesCount;
 
-        $numberOfPartlyPaidInvoices = Invoices::where('Status' , 1)->count();
-        $partPaidRate = $numberOfPartlyPaidInvoices/$numberOfInvoices * 100;
-        return view('index');
+        // paid
+        $numOfPaid = Invoices::where(['Status' => 0 , 'user_id' => Auth::id()])->count();
+        $rateOfPaid = $numOfPaid/$invoicesCount;
+        $totalPaid = Invoices::where(['Status' => 0 , 'user_id' => Auth::id()])->sum('Total');
 
+        // inapid
+        $numOfInPaid = Invoices::where(['Status' => 2 , 'user_id' => Auth::id()])->count();
+        $rateOfInPaid = $numOfInPaid/$invoicesCount;
+        $totalOfInPaid = Invoices::where(['Status' => 2 , 'user_id' => Auth::id()])->sum('Total');
+
+        // partPaid
+        $numOfPartPaid = Invoices::where(['Status' => 1 , 'user_id' => Auth::id()])->count();
+        $rateOfPartPaid = $numOfPartPaid/$invoicesCount;
+        $totalOfPartPaid = Invoices::where(['Status' => 1 , 'user_id' => Auth::id()])->sum('Total');
+
+        $data = [
+                'invoicesCount'=> $invoicesCount ,
+                'invoicesTotal' => $invoicesTotal ,
+                'numOfPaid' => $numOfPaid ,
+                '$rateOfPaid' => $rateOfPaid,
+                 'totalPaid' => $totalPaid ,
+                'numOfInPaid' => $numOfInPaid ,
+                'rateOfInPaid' => $rateOfInPaid ,
+                'totalOfInPaid' => $totalOfInPaid ,
+                'numOfPartPaid' => $numOfPartPaid ,
+                'rateOfPartPaid'=>$rateOfPartPaid ,
+                'totalOfPartPaid' => $totalOfPartPaid
+            ];
+        // return dd($data);
+        return view('index' , compact('data'));
+    }
+
+    public function login()
+    {
+        return view('auth.login');
     }
 
 

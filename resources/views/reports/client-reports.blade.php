@@ -15,7 +15,7 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
 @section('title')
-    تقرير العملاء - مورا سوفت للادارة الفواتير
+    تقرير العملاء 
 @stop
 @endsection
 @section('page-header')
@@ -153,33 +153,36 @@
                             <tbody>
                                 <?php $i = 0; ?>
                                 @foreach ($details as $invoice)
-                                    <?php $i++; ?>
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $invoice->invoice_number }} </td>
-                                        <td>{{ $invoice->invoice_Date }}</td>
-                                        <td>{{ $invoice->Due_date }}</td>
-                                        <td>{{ $invoice->product }}</td>
-                                        <td><a
-                                                href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
-                                        </td>
-                                        <td>{{ $invoice->Discount }}</td>
-                                        <td>{{ $invoice->Rate_VAT }}</td>
-                                        <td>{{ $invoice->Value_VAT }}</td>
-                                        <td>{{ $invoice->Total }}</td>
-                                        <td>
-                                            @if ($invoice->Status == 0)
-                                                <span class="text-success">مدفوعة</span>
-                                            @elseif($invoice->Status == 2)
-                                                <span class="text-danger">غير مدفوعة</span>
-                                            @else
-                                                <span class="text-warning">مدفوعة جزئيا</span>
-                                            @endif
+                                    @if ($invoice->section->user_id == Auth::id())
 
-                                        </td>
+                                        <?php $i++; ?>
+                                        <tr>
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $invoice->invoice_number }} </td>
+                                            <td>{{ $invoice->invoice_Date }}</td>
+                                            <td>{{ $invoice->Due_date }}</td>
+                                            <td>{{ $invoice->product }}</td>
+                                            <td><a
+                                                    href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
+                                            </td>
+                                            <td>{{ $invoice->Discount }}</td>
+                                            <td>{{ $invoice->Rate_VAT }}</td>
+                                            <td>{{ $invoice->Value_VAT }}</td>
+                                            <td>{{ $invoice->Total }}</td>
+                                            <td>
+                                                @if ($invoice->Status == 0)
+                                                    <span class="text-success">مدفوعة</span>
+                                                @elseif($invoice->Status == 2)
+                                                    <span class="text-danger">غير مدفوعة</span>
+                                                @else
+                                                    <span class="text-warning">مدفوعة جزئيا</span>
+                                                @endif
 
-                                        <td>{{ $invoice->note }}</td>
-                                    </tr>
+                                            </td>
+
+                                            <td>{{ $invoice->note }}</td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

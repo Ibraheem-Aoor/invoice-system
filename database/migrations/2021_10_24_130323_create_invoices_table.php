@@ -20,6 +20,8 @@ class CreateInvoicesTable extends Migration
             $table->date('Due_date')->nullable();
             $table->string('product', 50);
             $table->bigInteger( 'section_id' )->unsigned();
+            $table->bigInteger( 'user_id' )->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->decimal('Amount_collection',8,2)->nullable();;
             $table->decimal('Amount_Commission',8,2);

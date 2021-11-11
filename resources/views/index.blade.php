@@ -34,8 +34,9 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class=" tx-20 font-weight-bold mb-1 text-white">
-                                    {{ \App\Models\Invoices::sum('Total') }}</h4>
-                                <p class="mb-0 tx-12 text-white op-7">{{ \App\Models\Invoices::count() }}</p>
+                                    {{ $data['invoicesTotal'] }}</h4>
+                                <p class="mb-0 tx-12 text-white op-7">
+                                    {{ $data['invoicesCount'] }}</p>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
@@ -58,20 +59,20 @@
                             <div class="">
                                 <h4 class=" tx-20 font-weight-bold mb-1 text-white" id="inPaidAmount">
 
-                                    {{ \App\Models\Invoices::where('Status', 2)->sum('Total') }}
+                                    {{ $data['totalOfInPaid'] }}
                                 </h4>
 
                                 <p class="mb-0 tx-12 text-white op-7" id="inPaid">
-                                    {{ \App\Models\Invoices::where('Status', 2)->count() }}
+                                    {{ $data['numOfInPaid'] }}
                                 </p>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-down text-white"></i>
                                 <span class="text-white op-7">
-                                    @if (\App\Models\Invoices::count() == 0)
+                                    @if ($data['numOfInPaid'] == 0)
                                         0%
                                     @else
-                                        {{ (\App\Models\Invoices::where('Status', 2)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                        {{ $data['numOfInPaid'] / $data['invoicesCount'] }}
                                     @endif
                                 </span>
                             </span>
@@ -91,17 +92,20 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class=" tx-20 font-weight-bold mb-1 text-white" id="paidAmount">
-                                    {{ \App\Models\Invoices::where('Status', 0)->sum('Total') }}</h4>
+                                    {{ $data['totalPaid'] }}
+                                </h4>
                                 <p class="mb-0 tx-12 text-white op-7" id="paid">
-                                    {{ \App\Models\Invoices::where('Status', 0)->count() }} </p>
+                                    {{ $data['numOfPaid'] }}
+                                </p>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
                                 <span class="text-white op-7">
-                                    @if (\App\Models\Invoices::count() == 0)
+                                    @if ($data['numOfPaid'] == 0)
                                         {{ 0 }}
                                     @else
-                                        {{ (\App\Models\Invoices::where('Status', 0)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                        {{ $data['numOfPaid'] / $data['invoicesCount'] }}
+
                                     @endif
                                 </span>
                             </span>
@@ -122,17 +126,19 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class=" tx-20 font-weight-bold mb-1 text-white" id="partPaidAmount">
-                                    {{ \App\Models\Invoices::where('Status', 1)->sum('Total') }}</h4>
+                                    {{ $data['totalOfPartPaid'] }}
+                                </h4>
                                 <p class="mb-0 tx-12 text-white op-7" id="partPaid">
-                                    {{ \App\Models\Invoices::where('Status', 1)->count() }} </p>
+                                    {{ $data['numOfPartPaid'] }}
+                                </p>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-down text-white"></i>
                                 <span class="text-white op-7">
-                                    @if (\App\Models\Invoices::count() == 0)
+                                    @if ($data['numOfPartPaid'] == 0)
                                         {{ 0 }}
                                     @else
-                                        {{ (\App\Models\Invoices::where('Status', 1)->count() / \App\Models\Invoices::count()) * 100 }}%
+                                        {{$data['numOfPartPaid'] / $data['invoicesCount']}}
                                     @endif
                                 </span>
                             </span>

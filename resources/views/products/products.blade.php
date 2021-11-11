@@ -18,7 +18,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                الاقسام</span>
+                المنتجات</span>
         </div>
     </div>
 </div>
@@ -154,7 +154,7 @@
                                 <option value="" selected disabled> --حدد القسم--</option>
                                 @foreach ($sections as $i)
                                     <option value="{{ $i->id }}">{{ $i->section_name }}
-                                    <option>
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

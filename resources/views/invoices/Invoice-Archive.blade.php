@@ -13,7 +13,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ ارشيف الفواتير
+                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ ارشيف
+                    الفواتير
 
                 </span>
             </div>
@@ -55,118 +56,130 @@
                                                         style="width: 1218px;">
 
                                                         <thead>
-                                                        <tr role="row">
-                                                            <th class="wd-15p border-bottom-0 sorting_asc" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 204px;"
-                                                                aria-label="First name: activate to sort column descending"
-                                                                aria-sort="ascending">رقم الفاتورة</th>
-                                                            <th class="wd-15p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 204px;"
-                                                                aria-label="Last name: activate to sort column ascending">
-                                                                تاريخ الفاتورة</th>
-                                                            <th class="wd-20p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 284px;"
-                                                                aria-label="Position: activate to sort column ascending">
-                                                                تاريخ الاستحقاق</th>
-                                                            <th class="wd-15p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 204px;"
-                                                                aria-label="Start date: activate to sort column ascending">
-                                                                المنتج</th>
-                                                            <th class="wd-10p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 122px;"
-                                                                aria-label="Salary: activate to sort column ascending">
-                                                                القسم</th>
-                                                            <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 0px; display: none;"
-                                                                aria-label="E-mail: activate to sort column ascending">
-                                                                الخصم</th>
-                                                            <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 0px; display: none;"
-                                                                aria-label="E-mail: activate to sort column ascending">
-                                                                نسبة الضريبة</th>
-                                                            <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 0px; display: none;"
-                                                                aria-label="E-mail: activate to sort column ascending">
-                                                                قيمة الضريبة</th>
-                                                            <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 0px; display: none;"
-                                                                aria-label="E-mail: activate to sort column ascending">
-                                                                الاجمالي</th>
-                                                            <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 0px; display: none;"
-                                                                aria-label="E-mail: activate to sort column ascending">
-                                                                الحالة</th>
-                                                            <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 0px; display: none;"
-                                                                aria-label="E-mail: activate to sort column ascending">
-                                                                ملاحظات</th>
-                                                            <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                aria-controls="example2" rowspan="1" colspan="1"
-                                                                style="width: 0px; display: none;"
-                                                                aria-label="E-mail: activate to sort column ascending">
-                                                                عمليات</th>
-                                                        </tr>
+                                                            <tr role="row">
+                                                                <th class="wd-15p border-bottom-0 sorting_asc" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 204px;"
+                                                                    aria-label="First name: activate to sort column descending"
+                                                                    aria-sort="ascending">رقم الفاتورة</th>
+                                                                <th class="wd-15p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 204px;"
+                                                                    aria-label="Last name: activate to sort column ascending">
+                                                                    تاريخ الفاتورة</th>
+                                                                <th class="wd-20p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 284px;"
+                                                                    aria-label="Position: activate to sort column ascending">
+                                                                    تاريخ الاستحقاق</th>
+                                                                <th class="wd-15p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 204px;"
+                                                                    aria-label="Start date: activate to sort column ascending">
+                                                                    المنتج</th>
+                                                                <th class="wd-10p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 122px;"
+                                                                    aria-label="Salary: activate to sort column ascending">
+                                                                    القسم</th>
+                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 0px; display: none;"
+                                                                    aria-label="E-mail: activate to sort column ascending">
+                                                                    الخصم</th>
+                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 0px; display: none;"
+                                                                    aria-label="E-mail: activate to sort column ascending">
+                                                                    نسبة الضريبة</th>
+                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 0px; display: none;"
+                                                                    aria-label="E-mail: activate to sort column ascending">
+                                                                    قيمة الضريبة</th>
+                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 0px; display: none;"
+                                                                    aria-label="E-mail: activate to sort column ascending">
+                                                                    الاجمالي</th>
+                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 0px; display: none;"
+                                                                    aria-label="E-mail: activate to sort column ascending">
+                                                                    الحالة</th>
+                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 0px; display: none;"
+                                                                    aria-label="E-mail: activate to sort column ascending">
+                                                                    ملاحظات</th>
+                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                    aria-controls="example2" rowspan="1" colspan="1"
+                                                                    style="width: 0px; display: none;"
+                                                                    aria-label="E-mail: activate to sort column ascending">
+                                                                    عمليات</th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @if ($invoices->count() > 0)
-                                                            @foreach ($invoices as $invoice)
-                                                                <tr role="row" class="odd">
-                                                                    <td class="sorting_1" tabindex="0">
-                                                                        {{ $invoice->invoice_number }}</td>
-                                                                    <td>{{ $invoice->invoice_Date }}</td>
-                                                                    <td>{{ $invoice->Due_date }}</td>
-                                                                    <td>{{ $invoice->product }}</td>
-                                                                    <td>
+                                                            @if ($invoices->count() > 0)
+                                                                @foreach ($invoices as $invoice)
+                                                                    @if ($invoice->section->user_id == Auth::id())
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1" tabindex="0">
+                                                                                {{ $invoice->invoice_number }}</td>
+                                                                            <td>{{ $invoice->invoice_Date }}</td>
+                                                                            <td>{{ $invoice->Due_date }}</td>
+                                                                            <td>{{ $invoice->product }}</td>
+                                                                            <td>
 
-                                                                            {{ $invoice->section->section_name }}
+                                                                                {{ $invoice->section->section_name }}
 
-                                                                    </td>
-                                                                    <td>{{ $invoice->Discount }}</td>
-                                                                    <td>{{ $invoice->Rate_VAT }}</td>
-                                                                    <td>{{ $invoice->Value_VAT }}</td>
-                                                                    <td>{{ $invoice->Total }}</td>
-                                                                    @php
-                                                                        $status = $invoice->Status;
-                                                                    @endphp
-                                                                    @if($invoice->Value_Status == 0)
-                                                                        <td style="color:green">{{ $status }}</td>
-                                                                    @elseif($status == 1)
-                                                                        <td  style="color:#ea7d7d">{{ $status }}</td>
-                                                                    @else
-                                                                        <td style="color:red">{{ $status }}</td>
+                                                                            </td>
+                                                                            <td>{{ $invoice->Discount }}</td>
+                                                                            <td>{{ $invoice->Rate_VAT }}</td>
+                                                                            <td>{{ $invoice->Value_VAT }}</td>
+                                                                            <td>{{ $invoice->Total }}</td>
+                                                                            @php
+                                                                                $status = $invoice->Status;
+                                                                            @endphp
+                                                                            @if ($invoice->Value_Status == 0)
+                                                                                <td style="color:green">{{ $status }}
+                                                                                </td>
+                                                                            @elseif($status == 1)
+                                                                                <td style="color:#ea7d7d">
+                                                                                    {{ $status }}</td>
+                                                                            @else
+                                                                                <td style="color:red">{{ $status }}
+                                                                                </td>
+                                                                            @endif
+
+                                                                            @if ($x = $invoice->notes == null)
+                                                                                <td>لا يوجد</td>
+                                                                            @else
+                                                                                <td>{{ $x }}</td>
+                                                                            @endif
+                                                                            <td>
+                                                                                <div class="dropdown">
+                                                                                    <button aria-expanded="false"
+                                                                                        aria-haspopup="true"
+                                                                                        class="btn ripple btn-primary"
+                                                                                        data-toggle="dropdown"
+                                                                                        id="dropdownMenuButton"
+                                                                                        type="button">عمليات<i
+                                                                                            class="fas fa-caret-down ml-1"></i></button>
+                                                                                    <div class="dropdown-menu tx-13">
+                                                                                        <a class="dropdown-item"
+                                                                                            href="{{ route('invoices.archived.restore', $invoice->id) }}">
+                                                                                            <i
+                                                                                                class="fas fa-trash-restore-alt text-primary"></i>
+                                                                                            &nbsp;
+                                                                                            استعادة
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </tr>
                                                                     @endif
-
-                                                                    @if ($x = $invoice->notes == null)
-                                                                        <td>لا يوجد</td>
-                                                                    @else
-                                                                        <td>{{ $x }}</td>
-                                                                    @endif
-                                                                    <td>
-                                                                        <div class="dropdown">
-                                                                            <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
-                                                                                    data-toggle="dropdown" id="dropdownMenuButton" type="button">عمليات<i class="fas fa-caret-down ml-1"></i></button>
-                                                                            <div  class="dropdown-menu tx-13">
-                                                                                <a class="dropdown-item" href="{{route('invoices.archived.restore',$invoice->id)}}">
-                                                                                    <i class="fas fa-trash-restore-alt text-primary"></i>
-                                                                                    &nbsp;
-                                                                                    استعادة
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
+                                                                @endforeach
+                                                            @endif
 
                                                         </tbody>
                                                     </table>

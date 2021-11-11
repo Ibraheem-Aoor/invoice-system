@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Invoices;
 use App\Models\Section;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,5 +45,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Section::class , 'user_id');
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoices::class , 'user_id');
+    }
+
+
 
 }

@@ -3,7 +3,7 @@
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
 @section('title')
-    صلاحيات المستخدمين - مورا سوفت للادارة القانونية
+    صلاحيات المستخدمين
 @stop
 
 
@@ -31,7 +31,6 @@
                 type: "success"
             });
         }
-
     </script>
 @endif
 
@@ -43,7 +42,6 @@
                 type: "success"
             });
         }
-
     </script>
 @endif
 
@@ -55,7 +53,6 @@
                 type: "error"
             });
         }
-
     </script>
 @endif
 
@@ -68,8 +65,8 @@
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-right">
 
-                                <a class="btn btn-primary btn-sm" href="{{ route('roles.create') }}">اضافة</a>
-                      
+                            <a class="btn btn-primary btn-sm" href="{{ route('roles.create') }}">اضافة</a>
+
                         </div>
                     </div>
                     <br>
@@ -88,29 +85,27 @@
                         </thead>
                         <tbody>
                             @php
-                                $i=0;
+                                $i = 0;
                             @endphp
                             @foreach ($roles as $key => $role)
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>
-
+                                        @can('عرض صلاحية')
                                             <a class="btn btn-success btn-sm"
                                                 href="{{ route('roles.show', $role->id) }}">عرض</a>
+                                        @endcan
 
-
+                                        @can('تعديل صلاحية')
                                             <a class="btn btn-primary btn-sm"
                                                 href="{{ route('roles.edit', $role->id) }}">تعديل</a>
+                                        @endcan
 
-
-
-
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy',
-                                                $role->id], 'style' => 'display:inline']) !!}
-                                                {!! Form::submit('حذف', ['class' => 'btn btn-danger btn-sm']) !!}
-
-
+                                        @can('حذف صلاحية')
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
+                                            {!! Form::submit('حذف', ['class' => 'btn btn-danger btn-sm']) !!}
+                                        @endcan
 
 
                                     </td>
@@ -132,6 +127,8 @@
 @endsection
 @section('js')
 <!--Internal  Notify js -->
-<script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+<script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+<!--Internal  Notify js -->
+<script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 @endsection

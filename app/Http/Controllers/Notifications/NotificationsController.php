@@ -10,7 +10,7 @@ use App\Notifications\NewUser;
 use Illuminate\Notifications\Notification;
 class NotificationsController extends Controller
 {
-    public function markAllasRead($flag)
+    public function markAllasRead($flag = null)
     {
         if($flag != null)
         {

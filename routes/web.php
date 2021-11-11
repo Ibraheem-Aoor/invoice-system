@@ -23,7 +23,8 @@ use Spatie\Permission\Models\Role;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/index', 'HomeController@index');
+Route::get('/', 'HomeController@login');
 Auth::routes();
 
         /*
@@ -34,12 +35,12 @@ Auth::routes();
         // Route::get('/home', 'HomeController@index')->name('home');
 
 
-        /* Spite Package Routes */
+        /* Sptie Package Routes */
         Route::group(['middleware' => ['auth']], function() {
             Route::resource('roles','UserManagement\RoleController');
             Route::resource('users','UserManagement\UserController');
             });
-        /* Spite Package Routes */
+        /* Sptie Package Routes */
 
         Route::namespace('invoices')->group(function()
         {
@@ -114,9 +115,9 @@ Auth::routes();
     /* Start Notifications Rotues */
 
     // Testing real notifications
-    Route::get('event' , function()
+    Route::get('test' , function()
         {
-            $users = User::with('sections')->get();
+            return Auth::user()->status;
         });
         Route::get('/{page}', 'Admin\AdminController@index');
 

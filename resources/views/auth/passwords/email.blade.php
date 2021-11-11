@@ -1,7 +1,7 @@
 @extends('layouts.master2')
 
 @section('title')
-    تسجيل الدخول - مورا سوفت للادارة القانونية
+    تسجيل الدخول - ادارة الفواتير
 @stop
 
 
@@ -39,7 +39,7 @@
 
                                             <form method="POST" action="{{ route('password.email') }}">
                                                 @csrf
-                                                
+
                                                 <div class="form-group">
                                                     <label>البريد الالكتروني</label>
                                                     <input id="email" type="email"

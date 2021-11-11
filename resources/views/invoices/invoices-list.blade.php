@@ -42,10 +42,13 @@
             <div class="col-xl-12">
                 <div class="card">
                     <hr>
+                    @can('اضافة فاتورة')
                         <a class="btn btn-outline-primary" href="{{ route('invoice.add') }}" style="width:20%"
-                            class="mb-1">اضافة فاتورة</a> <hr>
-                        <a class="btn btn-outline-primary" href="{{ route('invoice.getExcel') }}" style="width:20%">طباعة
-                            اكسل</a>
+                            class="mb-1">اضافة فاتورة</a>
+                        <hr>
+                    @endcan
+                    <a class="btn btn-outline-primary" href="{{ route('invoice.getExcel') }}" style="width:20%">طباعة
+                        اكسل</a>
                     <div class="card-body">
                         <div class="table-responsive">
                             <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -130,82 +133,98 @@
                                                         <tbody>
                                                             @if ($invoices->count() > 0)
                                                                 @foreach ($invoices as $invoice)
-                                                                    <tr role="row" class="odd">
-                                                                        <td class="sorting_1" tabindex="0">
-                                                                            {{ $invoice->invoice_number }}</td>
-                                                                        <td>{{ $invoice->invoice_Date }}</td>
-                                                                        <td>{{ $invoice->Due_date }}</td>
-                                                                        <td>{{ $invoice->product }}</td>
-                                                                        <td>
-                                                                            <a
-                                                                                href="{{ route('invoices.detailes.show', $invoice->id) }}">
-                                                                                {{ $invoice->section->section_name }}
-                                                                            </a>
-                                                                        </td>
-                                                                        <td>{{ $invoice->Discount }}</td>
-                                                                        <td>{{ $invoice->Rate_VAT }}</td>
-                                                                        <td>{{ $invoice->Value_VAT }}</td>
-                                                                        <td>{{ $invoice->Total }}</td>
-                                                                        @php
-                                                                            $status = $invoice->Status;
-                                                                        @endphp
-                                                                        @if ($status = $invoice->Status == 0)
-                                                                            <td class="text text-success">مدفوعة</td>
-                                                                        @elseif($status == 1)
-                                                                            <td class="text text-warning">مدفوعة جزئيا</td>
-                                                                        @else
-                                                                            <td class="text text-danger">غير مدفوعة</td>
-                                                                        @endif
+                                                                    @if ($invoice->section->user_id == Auth::id())
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1" tabindex="0">
+                                                                                {{ $invoice->invoice_number }}</td>
+                                                                            <td>{{ $invoice->invoice_Date }}</td>
+                                                                            <td>{{ $invoice->Due_date }}</td>
+                                                                            <td>{{ $invoice->product }}</td>
+                                                                            <td>
+                                                                                <a
+                                                                                    href="{{ route('invoices.detailes.show', $invoice->id) }}">
+                                                                                    {{ $invoice->section->section_name }}
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>{{ $invoice->Discount }}</td>
+                                                                            <td>{{ $invoice->Rate_VAT }}</td>
+                                                                            <td>{{ $invoice->Value_VAT }}</td>
+                                                                            <td>{{ $invoice->Total }}</td>
+                                                                            @php
+                                                                                $status = $invoice->Status;
+                                                                            @endphp
+                                                                            @if ($status = $invoice->Status == 0)
+                                                                                <td class="text text-success">مدفوعة</td>
+                                                                            @elseif($status == 1)
+                                                                                <td class="text text-warning">مدفوعة جزئيا
+                                                                                </td>
+                                                                            @else
+                                                                                <td class="text text-danger">غير مدفوعة</td>
+                                                                            @endif
 
-                                                                        @if ($x = $invoice->notes == null)
-                                                                            <td>لا يوجد</td>
-                                                                        @else
-                                                                            <td>{{ $x }}</td>
-                                                                        @endif
-                                                                        <td>
-                                                                            <div class="dropdown">
-                                                                                <button aria-expanded="false"
-                                                                                    aria-haspopup="true"
-                                                                                    class="btn ripple btn-primary"
-                                                                                    data-toggle="dropdown"
-                                                                                    id="dropdownMenuButton"
-                                                                                    type="button">عمليات<i
-                                                                                        class="fas fa-caret-down ml-1"></i></button>
-                                                                                <div class="dropdown-menu tx-13">
-                                                                                    <a class="dropdown-item"
-                                                                                        href="{{ route('invoices.edit', $invoice->id) }}">
-                                                                                        <i class="las la-pen"
-                                                                                            style="color:green"></i>
-                                                                                        تعديل
-                                                                                    </a>
-                                                                                    <a class="dropdown-item"
-                                                                                        href="{{ route('invoice.delete', $invoice->id) }}">
-                                                                                        <i
-                                                                                            class="text-danger fas fa-trash-alt"></i>
-                                                                                        &nbsp;
-                                                                                        حذف
-                                                                                    </a> <a class="dropdown-item"
-                                                                                        href="{{ route('invoice.archive', $invoice->id) }}">
-                                                                                        <i
-                                                                                            class="text-warning fas fa-exchange-alt"></i>&nbsp;
-                                                                                        نقل الى الارشيف
-                                                                                    </a>
-                                                                                    <a class="dropdown-item"
-                                                                                        href="{{ route('invoice.payment.change', $invoice->id) }}">
-                                                                                        <i class="fa fa-credit-card"
-                                                                                            aria-hidden="true"></i>
-                                                                                        &nbsp;
-                                                                                        تغيير حالة الدفع
-                                                                                    </a>
-                                                                                    <a class="dropdown-item"
-                                                                                        href="{{ route('invoice.print', $invoice->id) }}">
-                                                                                        <i
-                                                                                            class="fa fa-print text-primary"></i>&nbsp;
-                                                                                        طباعة الفاتورة
-                                                                                    </a>
+                                                                            @if ($x = $invoice->notes == null)
+                                                                                <td>لا يوجد</td>
+                                                                            @else
+                                                                                <td>{{ $x }}</td>
+                                                                            @endif
+                                                                            <td>
+                                                                                <div class="dropdown">
+                                                                                    <button aria-expanded="false"
+                                                                                        aria-haspopup="true"
+                                                                                        class="btn ripple btn-primary"
+                                                                                        data-toggle="dropdown"
+                                                                                        id="dropdownMenuButton"
+                                                                                        type="button">عمليات<i
+                                                                                            class="fas fa-caret-down ml-1"></i></button>
+                                                                                    <div class="dropdown-menu tx-13">
+                                                                                        <a class="dropdown-item"
+                                                                                            href="{{ route('invoices.edit', $invoice->id) }}">
+                                                                                            <i class="las la-pen"
+                                                                                                style="color:green"></i>
+                                                                                            تعديل
+                                                                                        </a>
+                                                                                        @can('حذف الفاتورة')
+
+                                                                                            <a class="dropdown-item"
+                                                                                                href="{{ route('invoice.delete', $invoice->id) }}">
+                                                                                                <i
+                                                                                                    class="text-danger fas fa-trash-alt"></i>
+                                                                                                &nbsp;
+                                                                                                حذف
+                                                                                            </a>
+                                                                                        @endcan
+                                                                                        @can('ارشفة الفاتورة')
+                                                                                            <a class="dropdown-item"
+                                                                                                href="{{ route('invoice.archive', $invoice->id) }}">
+                                                                                                <i
+                                                                                                    class="text-warning fas fa-exchange-alt"></i>&nbsp;
+                                                                                                نقل الى الارشيف
+                                                                                            </a>
+                                                                                        @endcan
+
+                                                                                        @can('تغير حالة الدفع')
+                                                                                            <a class="dropdown-item"
+                                                                                                href="{{ route('invoice.payment.change', $invoice->id) }}">
+                                                                                                <i class="fa fa-credit-card"
+                                                                                                    aria-hidden="true"></i>
+                                                                                                &nbsp;
+                                                                                                تغيير حالة الدفع
+                                                                                            </a>
+                                                                                        @endcan
+
+                                                                                        @can('طباعةالفاتورة')
+                                                                                            <a class="dropdown-item"
+                                                                                                href="{{ route('invoice.print', $invoice->id) }}">
+                                                                                                <i
+                                                                                                    class="fa fa-print text-primary"></i>&nbsp;
+                                                                                                طباعة الفاتورة
+                                                                                            </a>
+                                                                                        @endcan
+
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                    </tr>
+                                                                        </tr>
+                                                                    @endif
                                                                 @endforeach
                                                             @endif
 

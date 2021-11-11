@@ -26,7 +26,6 @@ class ProductRequest extends FormRequest
             return [
                 'product_name' => 'string|required|max:225|',
                 'section_id' => 'required',
-                'description' => 'string|required|max:255|',
             ];
     }
 
@@ -40,7 +39,6 @@ class ProductRequest extends FormRequest
             'description.required' => 'الوصف  مطلوب',
             'description.max' => ' الوصف كبير جدا',
             'description.string' => ' الوصف  غير مقبول',
-            'section_id.required' => 'الرجاء اختيار القسم',
         ];
     }
 
