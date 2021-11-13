@@ -117,7 +117,7 @@ Auth::routes();
     // Testing real notifications
     Route::get('test' , function()
         {
-            return Auth::user()->status;
+            return now();
         });
         Route::get('/{page}', 'Admin\AdminController@index');
 

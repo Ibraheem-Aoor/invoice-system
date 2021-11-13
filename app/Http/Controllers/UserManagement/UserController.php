@@ -18,8 +18,8 @@ class UserController extends Controller
         $this->middleware('permission:اضافة مستخدم', ['only' => ['create','store']]);
         $this->middleware('permission:تعديل مستخدم', ['only' => ['edit','update']]);
         $this->middleware('permission:حذف مستخدم', ['only' => ['destroy']]);
-        $this->middleware('permission: تفعيل مستخدم', ['only' => ['activateAccount']]);
-        $this->middleware('permission: تعطيل مستخدم', ['only' => ['disableAccount']]);
+        $this->middleware('permission:تفعيل مستخدم', ['only' => ['activateAccount']]);
+        $this->middleware('permission:تعطيل مستخدم', ['only' => ['disableAccount']]);
     }
 
     public function index(Request $request)
@@ -64,7 +64,7 @@ class UserController extends Controller
         'roles_name' => 'required',
         'status' => 'required',
         ]);
-        $input = $request->all();   
+        $input = $request->all();
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();

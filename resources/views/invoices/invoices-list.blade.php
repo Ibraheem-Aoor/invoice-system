@@ -153,7 +153,7 @@
                                                                             @php
                                                                                 $status = $invoice->Status;
                                                                             @endphp
-                                                                            @if ($status = $invoice->Status == 0)
+                                                                            @if ( $status == 0)
                                                                                 <td class="text text-success">مدفوعة</td>
                                                                             @elseif($status == 1)
                                                                                 <td class="text text-warning">مدفوعة جزئيا

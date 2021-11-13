@@ -107,6 +107,9 @@ class InvoicesController extends Controller
         $invoice = Invoices::find($id);//inovice Table
         if($request->exists('status'))
         {
+            if($request->status == 1)
+                if($request->paidAmount == 0 || $request->paidAmount == null)
+                    return redirect()->back()->with(['emptyPaidAmount' => 'الرجاء ادخال المبلغ المحصل']);
             $this->updateInvoiceTable($request , $invoice , $request->status);
             $this->createNewDetailsRecord($request , $id);
             session()->flash('Add', 'تم تغيير حالة الدفع بنجاح');
@@ -127,12 +130,12 @@ class InvoicesController extends Controller
      */
     public function destroy($id)
     {
-         $target = Invoices::find($id);
-         $target->forcedelete();
+        $target = Invoices::find($id);
+        $target->forcedelete();
          //When deleting the invoice It's attachments directory will be deleted
-         Storage::disk('public_uploads')->getDriver()->deleteDir('/'.$target->invoice_number);
-         session()->flash('delete' , 'تم حذف الفاتورة بنجاح');
-         return redirect()->back();
+        Storage::disk('public_uploads')->getDriver()->deleteDir('/'.$target->invoice_number);
+        session()->flash('delete' , 'تم حذف الفاتورة بنجاح');
+        return redirect()->back();
     }
 
     /* Start insert Methods */
@@ -188,6 +191,11 @@ class InvoicesController extends Controller
     /* Start Update Methods */
     public function updateInvoiceTable(Request $request , Invoices $invoice , $status)
     {
+
+        $total = $request->Total - $request->paidAmount;
+        $date = now();
+        if($request->status == 2)
+            $date = null;
         $invoice->update([
             'invoice_number' => $request->invoice_number,
             'invoice_Date' => $request->invoice_Date,
@@ -199,7 +207,8 @@ class InvoicesController extends Controller
             'Discount' => $request->Discount,
             'Value_VAT' => $request->Value_VAT,
             'Rate_VAT' => $request->Rate_VAT,
-            'Total' => $request->Total,
+            'Total' => $total,
+            'Payment_Date' => $date ,  //Updating the payment date.
             'note' => $request->note,
             'Status'=>$status,
         ]);
@@ -224,11 +233,15 @@ class InvoicesController extends Controller
 
     public function createNewDetailsRecord(Request $request , $id)
     {
+        $date = now();
+        if($request->status == 2)
+           $date = null;
         InvoiceDetails::create([
                 'invoice_number' => $request->invoice_number,
                 'id_Invoice' => $id,
                 'product' => $request->product,
                 'Section' => $request->Section,
+                'Payment_Date' => $date,
                 'Status'=>$request->status,
                 'note' => $request->note,
                 'user' => Auth::user()->name,

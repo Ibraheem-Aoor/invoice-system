@@ -183,7 +183,7 @@
                             @endforeach
                         </div>
                         <div class="dropdown-footer">
-                            <a href="">VIEW ALL</a>
+                            <a href="">عرض الكل</a>
                         </div>
                     </div>
                 </div>
@@ -211,11 +211,10 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a> <a
+                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>الملف الشخصي</a>
+                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i> تعديل الملف الشخصي</a>
+                        <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>الرسائل</a>
+                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i>إعدادات الحساب</a> <a
                             class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
                                 class="bx bx-log-out"></i>تسجيل خروج</a>
