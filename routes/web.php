@@ -42,7 +42,7 @@ Auth::routes();
             });
         /* Sptie Package Routes */
 
-        Route::namespace('invoices')->group(function()
+        Route::namespace('Invoices')->group(function()
         {
             Route::get('/invoices-list', 'InvoicesController@index');
             Route::get('/invoices-add', 'InvoicesController@show')->name('invoice.add');
