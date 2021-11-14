@@ -64,7 +64,7 @@ class InvoicesController extends Controller
         if ($request->pic != null)
             $this->insertInvoiceAttachments($request, $invoice_id);
         session()->flash('Add', 'تمت إضافة الفاتورة بنجاح');
-        Notification::send(Auth::user() ,  new IncvoiceAdded($invoice_id));
+        // Notification::send(Auth::user() ,  new IncvoiceAdded($invoice_id));
         return redirect()->back();
     }
 
