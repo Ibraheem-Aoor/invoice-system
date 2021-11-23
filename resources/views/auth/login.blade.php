@@ -36,7 +36,7 @@
                                                     type="button">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
-                                                <strong>خطأ </strong>&nbsp; {{Session::get('AccountDisabled')}}
+                                                <strong>خطأ </strong>&nbsp; {{ Session::get('AccountDisabled') }}
                                             </div>
                                         @endif
                                         <div class="main-signup-header">
@@ -111,7 +111,7 @@
             <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
                 <div class="row wd-100p mx-auto text-center">
                     <div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-                        <img src="{{ URL::asset('assets/img/media/login.png') }}"
+                        <img src="{{ URL::asset('assets/img/introPic.png') }}"
                             class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
                     </div>
                 </div>

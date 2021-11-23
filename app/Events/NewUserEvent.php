@@ -10,10 +10,9 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewUser implements ShouldBroadcast
+class NewUserEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
 
     /**
      * Create a new event instance.
@@ -31,8 +30,8 @@ class NewUser implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-        public function broadcastOn()
-        {
-            return new PrivateChannel('my-channel');
-        }
+    public function broadcastOn()
+    {
+        return new PrivateChannel('newUser');
+    }
 }

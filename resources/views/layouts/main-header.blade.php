@@ -95,6 +95,8 @@
                         </div>
                     </form>
                 </div> --}}
+
+
                 <div class="dropdown nav-item main-header-message ">
                     <a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -107,11 +109,13 @@
                         <div class="menu-header-content bg-primary text-right">
                             <div class="d-flex">
                                 <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الرسائل</h6>
-                                <span class="badge badge-pill badge-warning mr-auto my-auto float-left">تحديد الكل ك مقروءة
-                                    </span>
+                                <span class="badge badge-pill badge-warning mr-auto my-auto float-left">تحديد الكل ك
+                                    مقروءة
+                                </span>
                             </div>
-                            <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">لديك 5 رسائل غير مقروءة
-                                </p>
+                            <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">لديك 5 رسائل غير
+                                مقروءة
+                            </p>
                         </div>
                         <div class="main-message-list chat-scroll">
                             <a href="#" class="p-3 d-flex border-bottom">
@@ -136,9 +140,9 @@
                 </div>
                 <div class="dropdown nav-item main-header-notification">
                     <a class="new nav-link" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-bell">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-bell">
                             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                         </svg><span class=" pulse"></span></a>
@@ -148,7 +152,7 @@
                                 <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الاشعارات
                                 </h6>
                                 <span class="badge badge-pill badge-warning mr-auto my-auto float-left">
-                                    <a href="{{route('markAllasRead')}}">
+                                    <a href="{{ route('markAllasRead') }}">
                                         تحديد الكل مقروءة
                                 </span>
                                 </a>
@@ -161,7 +165,7 @@
                         <div class="main-notification-list Notification-scroll">
                             @foreach (Auth::user()->unReadNotifications as $notification)
                                 <a class="d-flex p-3 border-bottom"
-                                    href="{{route('markAllasRead' , $notification->id)}}">
+                                    href="{{ route('markAllasRead', $notification->id) }}">
                                     <div class="notifyimg bg-primary">
                                         <i class="la la-check-circle text-white"></i>
                                     </div>
@@ -198,24 +202,34 @@
                         </svg></a>
                 </div>
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
-                    <a class="profile-user d-flex" href=""><img alt=""
-                            src="{{ URL::asset('assets/img/6.jpg') }}"></a>
+                    @if (Auth::user()->avatar == null)
+                        <a class="profile-user d-flex" href=""><img alt=""
+                                src="{{ asset('/defaultAvatar.jpg') }}"></a>
+                    @else
+                        <a class="profile-user d-flex" href=""><img alt=""
+                                src="{{ asset('Avatars'.'/'. Auth::user()->avatar) }}"></a>
+                    @endif
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
-                                <div class="main-img-user"><img alt=""
-                                        src="{{ URL::asset('assets/img/6.jpg') }}" class="">
+                                <div class="main-img-user">
+                                    @if (Auth::user()->avatar == null)
+                                        <img alt="" src="{{ asset('/defaultAvatar.jpg') }}" class="">
+                                    @else
+                                        <img alt="" src="{{ asset('Avatars'.'/'. Auth::user()->avatar) }}" class="">
+                                    @endif
                                 </div>
                                 <div class="mr-3 my-auto">
                                     <h6>{{ Auth::user()->name }}</h6>
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>الملف الشخصي</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i> تعديل الملف الشخصي</a>
+                        <a class="dropdown-item" href="{{ url('/' . ($page = 'profile-show')) }}"><i
+                                class="bx bx-user-circle"></i>تعديل الملف الشخصي</a>
+                        {{-- <a class="dropdown-item" href="{{url('/'.$page='users')}}"><i class="bx bx-cog"></i> تعديل الملف الشخصي</a> --}}
                         <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>الرسائل</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i>إعدادات الحساب</a> <a
-                            class="dropdown-item" href="{{ route('logout') }}"
+                        {{-- <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i>إعدادات الحساب</a> --}}
+                        <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
                                 class="bx bx-log-out"></i>تسجيل خروج</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -226,7 +240,7 @@
 
                     </div>
                 </div>
-                <div class="dropdown main-header-message right-toggle">
+                {{-- <div class="dropdown main-header-message right-toggle">
                     <a class="nav-link pr-0" data-toggle="sidebar-left" data-target=".sidebar-left">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -236,7 +250,7 @@
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

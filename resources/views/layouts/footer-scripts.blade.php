@@ -31,3 +31,19 @@
 <!-- custom js -->
 <script src="{{URL::asset('assets/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('assets/plugins/side-menu/sidemenu.js')}}"></script>
+
+
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('9d0599b90368895383da', {
+            cluster: 'mt1'
+        });
+        // const userId = "{{Auth::id()}}";
+        var channel = pusher.subscribe('fuck');
+        channel.bind('NewUser',function(data) {
+            alert("This is a Testing alert");
+        });
+    </script>

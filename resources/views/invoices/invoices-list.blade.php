@@ -42,13 +42,26 @@
             <div class="col-xl-12">
                 <div class="card">
                     <hr>
-                    @can('اضافة فاتورة')
-                        <a class="btn btn-outline-primary" href="{{ route('invoice.add') }}" style="width:20%"
-                            class="mb-1">اضافة فاتورة</a>
-                        <hr>
-                    @endcan
-                    <a class="btn btn-outline-primary" href="{{ route('invoice.getExcel') }}" style="width:20%">طباعة
-                        اكسل</a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @can('اضافة فاتورة')
+                                    <a class="btn btn-primary col-sm-2 mb-1" href="{{ route('invoice.add') }}">اضافة
+                                        فاتورة</a>
+                                @endcan
+
+                                <a class="btn btn-primary col-sm-2  mb-1" href="{{ route('invoice.getExcel') }}">طباعة
+                                    اكسل</a>
+
+                                <a class="btn btn-danger col-sm-2  mb-1" id="formSubmittion">
+                                    حذف الكل
+                                </a>
+                                <a class="btn btn-warning col-sm-2  mb-1" id="formSubmittion">
+                                    أرشفة الكل
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -60,176 +73,195 @@
 
                                             <div class="row">
                                                 <div class="col-sm-12">
+                                                    <form action="/asdasdasd" method="POST" id="myForm">
+                                                        <table
+                                                            class="table text-md-nowrap dataTable no-footer dtr-inline collapsed"
+                                                            id="example2" role="grid" aria-describedby="example2_info"
+                                                            style="width: 1218px;">
 
-                                                    <table
-                                                        class="table text-md-nowrap dataTable no-footer dtr-inline collapsed"
-                                                        id="example2" role="grid" aria-describedby="example2_info"
-                                                        style="width: 1218px;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="wd-15p border-bottom-0 sorting_asc"
+                                                                        tabindex="0" aria-controls="example2" rowspan="1"
+                                                                        colspan="1" style="width: 204px;"
+                                                                        aria-label="First name: activate to sort column descending"
+                                                                        aria-sort="ascending"> <input type="checkbox"
+                                                                            name="checkBox" id="checkBoxParent"></th>
+                                                                    <th role="row"
+                                                                        class="wd-15p border-bottom-0 sorting_asc"
+                                                                        tabindex="0" aria-controls="example2" rowspan="1"
+                                                                        colspan="1" style="width: 204px;"
+                                                                        aria-label="First name: activate to sort column descending"
+                                                                        aria-sort="ascending"> رقم الفاتورة</th>
 
-                                                        <thead>
-                                                            <tr role="row">
-                                                                <th class="wd-15p border-bottom-0 sorting_asc" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 204px;"
-                                                                    aria-label="First name: activate to sort column descending"
-                                                                    aria-sort="ascending">رقم الفاتورة</th>
-                                                                <th class="wd-15p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 204px;"
-                                                                    aria-label="Last name: activate to sort column ascending">
-                                                                    تاريخ الفاتورة</th>
-                                                                <th class="wd-20p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 284px;"
-                                                                    aria-label="Position: activate to sort column ascending">
-                                                                    تاريخ الاستحقاق</th>
-                                                                <th class="wd-15p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 204px;"
-                                                                    aria-label="Start date: activate to sort column ascending">
-                                                                    المنتج</th>
-                                                                <th class="wd-10p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 122px;"
-                                                                    aria-label="Salary: activate to sort column ascending">
-                                                                    القسم</th>
-                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 0px; display: none;"
-                                                                    aria-label="E-mail: activate to sort column ascending">
-                                                                    الخصم</th>
-                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 0px; display: none;"
-                                                                    aria-label="E-mail: activate to sort column ascending">
-                                                                    نسبة الضريبة</th>
-                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 0px; display: none;"
-                                                                    aria-label="E-mail: activate to sort column ascending">
-                                                                    قيمة الضريبة</th>
-                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 0px; display: none;"
-                                                                    aria-label="E-mail: activate to sort column ascending">
-                                                                    الاجمالي</th>
-                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 0px; display: none;"
-                                                                    aria-label="E-mail: activate to sort column ascending">
-                                                                    الحالة</th>
-                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 0px; display: none;"
-                                                                    aria-label="E-mail: activate to sort column ascending">
-                                                                    ملاحظات</th>
-                                                                <th class="wd-25p border-bottom-0 sorting" tabindex="0"
-                                                                    aria-controls="example2" rowspan="1" colspan="1"
-                                                                    style="width: 0px; display: none;"
-                                                                    aria-label="E-mail: activate to sort column ascending">
-                                                                    عمليات</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if ($invoices->count() > 0)
-                                                                @foreach ($invoices as $invoice)
-                                                                    @if ($invoice->section->user_id == Auth::id())
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1" tabindex="0">
-                                                                                {{ $invoice->invoice_number }}</td>
-                                                                            <td>{{ $invoice->invoice_Date }}</td>
-                                                                            <td>{{ $invoice->Due_date }}</td>
-                                                                            <td>{{ $invoice->product }}</td>
-                                                                            <td>
-                                                                                <a
-                                                                                    href="{{ route('invoices.detailes.show', $invoice->id) }}">
-                                                                                    {{ $invoice->section->section_name }}
-                                                                                </a>
-                                                                            </td>
-                                                                            <td>{{ $invoice->Discount }}</td>
-                                                                            <td>{{ $invoice->Rate_VAT }}</td>
-                                                                            <td>{{ $invoice->Value_VAT }}</td>
-                                                                            <td>{{ $invoice->Total }}</td>
-                                                                            @php
-                                                                                $status = $invoice->Status;
-                                                                            @endphp
-                                                                            @if ( $status == 0)
-                                                                                <td class="text text-success">مدفوعة</td>
-                                                                            @elseif($status == 1)
-                                                                                <td class="text text-warning">مدفوعة جزئيا
+                                                                    <th class="wd-15p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 204px;"
+                                                                        aria-label="Last name: activate to sort column ascending">
+                                                                        تاريخ الفاتورة</th>
+                                                                    <th class="wd-20p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 284px;"
+                                                                        aria-label="Position: activate to sort column ascending">
+                                                                        تاريخ الاستحقاق</th>
+                                                                    <th class="wd-15p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 204px;"
+                                                                        aria-label="Start date: activate to sort column ascending">
+                                                                        المنتج</th>
+                                                                    <th class="wd-10p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 122px;"
+                                                                        aria-label="Salary: activate to sort column ascending">
+                                                                        القسم</th>
+                                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 0px; display: none;"
+                                                                        aria-label="E-mail: activate to sort column ascending">
+                                                                        الخصم</th>
+                                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 0px; display: none;"
+                                                                        aria-label="E-mail: activate to sort column ascending">
+                                                                        نسبة الضريبة</th>
+                                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 0px; display: none;"
+                                                                        aria-label="E-mail: activate to sort column ascending">
+                                                                        قيمة الضريبة</th>
+                                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 0px; display: none;"
+                                                                        aria-label="E-mail: activate to sort column ascending">
+                                                                        الاجمالي</th>
+                                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 0px; display: none;"
+                                                                        aria-label="E-mail: activate to sort column ascending">
+                                                                        الحالة</th>
+                                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 0px; display: none;"
+                                                                        aria-label="E-mail: activate to sort column ascending">
+                                                                        ملاحظات</th>
+                                                                    <th class="wd-25p border-bottom-0 sorting" tabindex="0"
+                                                                        aria-controls="example2" rowspan="1" colspan="1"
+                                                                        style="width: 0px; display: none;"
+                                                                        aria-label="E-mail: activate to sort column ascending">
+                                                                        عمليات</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if ($invoices->count() > 0)
+                                                                    @foreach ($invoices as $invoice)
+                                                                        @if ($invoice->section->user_id == Auth::id())
+                                                                            <tr role="row" class="odd">
+                                                                                <td style="text-align: center">
+                                                                                    <input type="checkbox" name="checkBox"
+                                                                                        class="checkBoxClass"
+                                                                                        value="{{ $invoice->id }}">
                                                                                 </td>
-                                                                            @else
-                                                                                <td class="text text-danger">غير مدفوعة</td>
-                                                                            @endif
+                                                                                <td class="sorting_1" tabindex="0">
 
-                                                                            @if ($x = $invoice->notes == null)
-                                                                                <td>لا يوجد</td>
-                                                                            @else
-                                                                                <td>{{ $x }}</td>
-                                                                            @endif
-                                                                            <td>
-                                                                                <div class="dropdown">
-                                                                                    <button aria-expanded="false"
-                                                                                        aria-haspopup="true"
-                                                                                        class="btn ripple btn-primary"
-                                                                                        data-toggle="dropdown"
-                                                                                        id="dropdownMenuButton"
-                                                                                        type="button">عمليات<i
-                                                                                            class="fas fa-caret-down ml-1"></i></button>
-                                                                                    <div class="dropdown-menu tx-13">
-                                                                                        <a class="dropdown-item"
-                                                                                            href="{{ route('invoices.edit', $invoice->id) }}">
-                                                                                            <i class="las la-pen"
-                                                                                                style="color:green"></i>
-                                                                                            تعديل
-                                                                                        </a>
-                                                                                        @can('حذف الفاتورة')
+                                                                                    {{ $invoice->invoice_number }}
+                                                                                </td>
+                                                                                <td>{{ $invoice->invoice_Date }}</td>
+                                                                                <td>{{ $invoice->Due_date }}</td>
+                                                                                <td>{{ $invoice->product }}</td>
+                                                                                <td>
+                                                                                    <a
+                                                                                        href="{{ route('invoices.detailes.show', $invoice->id) }}">
+                                                                                        {{ $invoice->section->section_name }}
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td>{{ $invoice->Discount }}</td>
+                                                                                <td>{{ $invoice->Rate_VAT }}</td>
+                                                                                <td>{{ $invoice->Value_VAT }}</td>
+                                                                                <td>{{ $invoice->Total }}</td>
+                                                                                @php
+                                                                                    $status = $invoice->Status;
+                                                                                @endphp
+                                                                                @if ($status == 0)
+                                                                                    <td class="text text-success">مدفوعة
+                                                                                    </td>
+                                                                                @elseif($status == 1)
+                                                                                    <td class="text text-warning">مدفوعة
+                                                                                        جزئيا
+                                                                                    </td>
+                                                                                @else
+                                                                                    <td class="text text-danger">غير مدفوعة
+                                                                                    </td>
+                                                                                @endif
 
+                                                                                @if ($x = $invoice->notes == null)
+                                                                                    <td>لا يوجد</td>
+                                                                                @else
+                                                                                    <td>{{ $x }}</td>
+                                                                                @endif
+                                                                                <td>
+                                                                                    <div class="dropdown">
+                                                                                        <button aria-expanded="false"
+                                                                                            aria-haspopup="true"
+                                                                                            class="btn ripple btn-primary"
+                                                                                            data-toggle="dropdown"
+                                                                                            id="dropdownMenuButton"
+                                                                                            type="button">عمليات<i
+                                                                                                class="fas fa-caret-down ml-1"></i></button>
+                                                                                        <div class="dropdown-menu tx-13">
                                                                                             <a class="dropdown-item"
-                                                                                                href="{{ route('invoice.delete', $invoice->id) }}">
-                                                                                                <i
-                                                                                                    class="text-danger fas fa-trash-alt"></i>
-                                                                                                &nbsp;
-                                                                                                حذف
+                                                                                                href="{{ route('invoices.edit', $invoice->id) }}">
+                                                                                                <i class="las la-pen"
+                                                                                                    style="color:green"></i>
+                                                                                                تعديل
                                                                                             </a>
-                                                                                        @endcan
-                                                                                        @can('ارشفة الفاتورة')
-                                                                                            <a class="dropdown-item"
-                                                                                                href="{{ route('invoice.archive', $invoice->id) }}">
-                                                                                                <i
-                                                                                                    class="text-warning fas fa-exchange-alt"></i>&nbsp;
-                                                                                                نقل الى الارشيف
-                                                                                            </a>
-                                                                                        @endcan
+                                                                                            @can('حذف الفاتورة')
 
-                                                                                        @can('تغير حالة الدفع')
-                                                                                            <a class="dropdown-item"
-                                                                                                href="{{ route('invoice.payment.change', $invoice->id) }}">
-                                                                                                <i class="fa fa-credit-card"
-                                                                                                    aria-hidden="true"></i>
-                                                                                                &nbsp;
-                                                                                                تغيير حالة الدفع
-                                                                                            </a>
-                                                                                        @endcan
+                                                                                                <a class="dropdown-item"
+                                                                                                    href="{{ route('invoice.delete', $invoice->id) }}">
+                                                                                                    <i
+                                                                                                        class="text-danger fas fa-trash-alt"></i>
+                                                                                                    &nbsp;
+                                                                                                    حذف
+                                                                                                </a>
+                                                                                            @endcan
+                                                                                            @can('ارشفة الفاتورة')
+                                                                                                <a class="dropdown-item"
+                                                                                                    href="{{ route('invoice.archive', $invoice->id) }}">
+                                                                                                    <i
+                                                                                                        class="text-warning fas fa-exchange-alt"></i>&nbsp;
+                                                                                                    نقل الى الارشيف
+                                                                                                </a>
+                                                                                            @endcan
 
-                                                                                        @can('طباعةالفاتورة')
-                                                                                            <a class="dropdown-item"
-                                                                                                href="{{ route('invoice.print', $invoice->id) }}">
-                                                                                                <i
-                                                                                                    class="fa fa-print text-primary"></i>&nbsp;
-                                                                                                طباعة الفاتورة
-                                                                                            </a>
-                                                                                        @endcan
+                                                                                            @can('تغير حالة الدفع')
+                                                                                                <a class="dropdown-item"
+                                                                                                    href="{{ route('invoice.payment.change', $invoice->id) }}">
+                                                                                                    <i class="fa fa-credit-card"
+                                                                                                        aria-hidden="true"></i>
+                                                                                                    &nbsp;
+                                                                                                    تغيير حالة الدفع
+                                                                                                </a>
+                                                                                            @endcan
 
+                                                                                            @can('طباعةالفاتورة')
+                                                                                                <a class="dropdown-item"
+                                                                                                    href="{{ route('invoice.print', $invoice->id) }}">
+                                                                                                    <i
+                                                                                                        class="fa fa-print text-primary"></i>&nbsp;
+                                                                                                    طباعة الفاتورة
+                                                                                                </a>
+                                                                                            @endcan
+
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
-                                                                        </tr>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
 
-                                                        </tbody>
-                                                    </table>
+                                                            </tbody>
+                                                        </table>
+                                                    </form>
                                                 </div>
                                             </div>
 
@@ -281,6 +313,19 @@
     </script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    <script>
+        // $(function(e) {
+        //     $('#checkBoxParent').click(function() {
+        //         $('.checkBoxClass').prop('checked', $(this).prop('checked'));
+        //     });
+        // });
 
+        window.addEventListener("DOMContentLoaded", function() {
+            var form = document.getElementById("myForm");
 
+            document.getElementById("formSubmittion").addEventListener("click", function() {
+                form.submit();
+            });
+        });
+    </script>
 @endsection

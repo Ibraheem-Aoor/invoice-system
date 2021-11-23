@@ -235,17 +235,17 @@ class InvoicesController extends Controller
     {
         $date = now();
         if($request->status == 2)
-           $date = null;
-        InvoiceDetails::create([
-                'invoice_number' => $request->invoice_number,
-                'id_Invoice' => $id,
-                'product' => $request->product,
-                'Section' => $request->Section,
-                'Payment_Date' => $date,
-                'Status'=>$request->status,
-                'note' => $request->note,
-                'user' => Auth::user()->name,
-        ]);
+            $date = null;
+            InvoiceDetails::create([
+                    'invoice_number' => $request->invoice_number,
+                    'id_Invoice' => $id,
+                    'product' => $request->product,
+                    'Section' => $request->Section,
+                    'Payment_Date' => $date,
+                    'Status'=>$request->status,
+                    'note' => $request->note,
+                    'user' => Auth::user()->name,
+            ]);
     }
 
 

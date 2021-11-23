@@ -25,15 +25,14 @@ class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
         return [
            'رقم الفاتورة' , 'تاريخ الفاتورة',
            'تاريخ الاستحقاق' , 'المنتج',
-           ' القسم' , 'الخصم',
-           ' نسبة الضريبة' , 'قيمة الضريبة',
-           ' الاجمالي' , 'الحالة',
+           ' القسم' , 'مبلغ التحصيل','مبلغ العمولة' , 'الخصم' , 'قيمة الضريبة' , 'نسبة الضريبة' , 'الاجمالي' , '' ,'تاريخ الدفع'
         ];
     }
     public function styles(Worksheet $sheet)
     {
         return[
-            1 => ['font' => ['bold' => true]],
+            1 => ['font' => ['bold' => true],
+        ],
         ];
     }
     /* End implementing methods */
@@ -41,8 +40,8 @@ class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
 
     public function collection()
     {
-       $sections = Section::where('user_id' , Auth::id())->get();
-       $sections->makeHidden(['id' , 'section_name' , 'discreption' ]);
-       return $sections->invoices->makeHidden(['id' , 'note']);
+        $invoices = Invoices::where('user_id', Auth::id())->get();
+        $invoices->makeHidden(['id' , 'created_at' , 'deleted_at' , 'updated_at' ,'user_id' , 'Status']);
+        return $invoices;
     }
 }//End Class

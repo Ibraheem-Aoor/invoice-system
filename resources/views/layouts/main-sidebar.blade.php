@@ -16,9 +16,14 @@
         <div class="app-sidebar__user clearfix">
             <div class="dropdown user-pro-body">
                 <div class="">
-                    <img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{ URL::asset('assets/img/6.jpg') }}"><span
-                        class="avatar-status profile-status bg-green"></span>
+                    @if (Auth::user()->avatar == null)
+                        <img alt="" src="{{ asset('/defaultAvatar.jpg') }}" class="avatar avatar-xl brround">
+                    @else
+                        <img alt="" src="{{ asset('Avatars'.'/'. Auth::user()->avatar) }}"
+                            class="avatar avatar-xl brround">
+                    @endif
+                    <span class="avatar-status profile-status bg-green">
+                    </span>
                 </div>
                 <div class="user-info">
                     @if (Auth::check())

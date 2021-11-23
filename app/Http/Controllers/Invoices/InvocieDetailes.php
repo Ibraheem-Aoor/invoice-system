@@ -128,4 +128,9 @@ class InvocieDetailes extends Controller
     {
         return Excel::download(new InvoiceExprot(), 'Invoices.xlsx');
     }
+
+    public function test(Request $request)
+    {
+        return 'asdasdasdas';
+    }
 }

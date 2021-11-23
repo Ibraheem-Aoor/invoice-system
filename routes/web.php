@@ -10,6 +10,7 @@ use App\User;
 use App\Http\Controllers\Reports\ClientsReports;
 use App\Notifications\NewUser as NotificationsNewUser;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Request;
 use Spatie\Permission\Models\Role;
 
 /*
@@ -64,6 +65,8 @@ Auth::routes();
             Route::get('/invoices-not-paid' , 'InvocieDetailes@InvoicesNotPaid');
             Route::get('/invoices-fully-paid' , 'InvocieDetailes@InvoicestFullyPaid');
             Route::get('/invoices-Excel' , 'InvocieDetailes@getExcel')->name('invoice.getExcel');
+            Route::post('/test' ,'InvocieDetailes@test')->name('test');
+
         });
         /* End Invoices Routes */
 
@@ -107,6 +110,11 @@ Auth::routes();
         Route::get('account.active/{id}','UserController@activateAccount')->name('account.active');
     });
 
+    Route::namespace('profile')->group(function(){
+        Route::get('profile-show' , 'ProfileController@index');
+        Route::patch('profile-show/{user_id}' , 'ProfileController@update')->name('AuthUser.profile.update');
+    });
+
     /* Start Notifications Rotues */
     Route::namespace('Notifications')->group(function()
     {
@@ -115,11 +123,10 @@ Auth::routes();
     /* Start Notifications Rotues */
 
     // Testing real notifications
-    Route::get('test' , function()
-        {
-            return now();
-        });
         Route::get('/{page}', 'Admin\AdminController@index');
 
-
+        Route::post('/asdasdasd' , function()
+        {
+            return redirect()->back();
+        })->name('myTest');
 

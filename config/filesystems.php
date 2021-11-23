@@ -53,6 +53,11 @@ return [
             'root'   => public_path() . '/Attachments',
             ],
 
+        'public_avatars' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/Avatars',
+            ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

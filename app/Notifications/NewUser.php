@@ -41,7 +41,7 @@ class NewUser extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database' , 'broadcast'];
     }
 
     /**
@@ -56,6 +56,14 @@ class NewUser extends Notification
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
+    }
+
+    public function toBroadCast()
+    {
+        return new BroadcastMessage([
+            'title' => $this->title,
+            'body' => $this->body,
+        ]);
     }
 
     /**

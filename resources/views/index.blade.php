@@ -36,7 +36,12 @@
                                 <h4 class=" tx-20 font-weight-bold mb-1 text-white">
                                     {{ $data['invoicesTotal'] }}</h4>
                                 <p class="mb-0 tx-12 text-white op-7">
-                                    {{ $data['invoicesCount'] }}</p>
+                                    @if (\App\Models\Invoices::where('user_id', Auth::id())->count() == 0)
+                                        {{ 0 }}
+                                    @else
+                                        {{ $data['invoicesCount'] }}
+                                </p>
+                                @endif
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
@@ -72,7 +77,7 @@
                                     @if ($data['numOfInPaid'] == 0)
                                         0%
                                     @else
-                                        {{ $data['numOfInPaid'] / $data['invoicesCount'] }}
+                                        {{ $data['rateOfInPaid'] }}
                                     @endif
                                 </span>
                             </span>
@@ -104,7 +109,7 @@
                                     @if ($data['numOfPaid'] == 0)
                                         {{ 0 }}
                                     @else
-                                        {{ $data['numOfPaid'] / $data['invoicesCount'] }}
+                                        {{ $data['rateOfPaid'] }}
 
                                     @endif
                                 </span>
@@ -138,7 +143,7 @@
                                     @if ($data['numOfPartPaid'] == 0)
                                         {{ 0 }}
                                     @else
-                                        {{$data['numOfPartPaid'] / $data['invoicesCount']}}
+                                        {{ $data['rateOfPartPaid'] }}
                                     @endif
                                 </span>
                             </span>
@@ -152,27 +157,40 @@
     <!-- row closed -->
 
 
-    <!-- row opened -->
-    <div class="row row-sm">
-        <div class="col-sm-6 ">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="myChart2" width="200" height="200">
-                    </canvas>
+    @if (\App\Models\Invoices::where('user_id', Auth::id())->count() == 0)
+        <div class="row row-sm">
+            <div class="col-sm-12 " style="text-align: center">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>لا يوجد إحصائيات لعرضها.</h1>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 ">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="myChart" width="200" height="200">
-                    </canvas>
+    @else
+        <!-- row opened -->
+        <div class="row row-sm">
+            <div class="col-sm-6 ">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="myChart2" width="200" height="200">
+                        </canvas>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="col-sm-6 ">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="myChart" width="200" height="200">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
 
-    </div>
-    <!-- row closed -->
+        </div>
+        <!-- row closed -->
+    @endif
+
 
 
 
@@ -203,6 +221,10 @@
     <script src="{{ URL::asset('assets/js/index.js') }}"></script>
     <script src="{{ URL::asset('assets/js/jquery.vmap.sampledata.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
     <script>
         var inpaid = $('#inPaid').text();
         var paid = $('#paid').text();
@@ -276,20 +298,7 @@
         );
     </script>
 
-    {{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
 
-        var pusher = new Pusher('9d0599b90368895383da', {
-            cluster: 'mt1'
-        });
-
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-            alert(JSON.stringify(data));
-        });
-    </script> --}}
 
 
 
