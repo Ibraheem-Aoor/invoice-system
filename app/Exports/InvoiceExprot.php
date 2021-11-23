@@ -20,7 +20,7 @@ class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
     */
 
     /* Start implementing methods */
-    public function headings():array
+    public function headings(): array
     {
         return [
            'رقم الفاتورة' , 'تاريخ الفاتورة',
