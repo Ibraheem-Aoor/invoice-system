@@ -77,7 +77,7 @@ class ProfileController extends Controller
             $avatarExt = $request->avatar->getClientOriginalExtension();
             $avatarName = time().'.'.$avatarExt;
             $image = $request->file('avatar');
-            $newImage = Image::make($image->getRealPath())->resize(600,600);
+            $newImage = Image::make($image->getRealPath())->resize(100,100);
             $path = public_path('/Avatars'.'/'.$avatarName);
             if(Auth::user()->avatar != null)
             {

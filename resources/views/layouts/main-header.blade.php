@@ -97,7 +97,7 @@
                 </div> --}}
 
 
-                <div class="dropdown nav-item main-header-message ">
+                {{-- <div class="dropdown nav-item main-header-message ">
                     <a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
@@ -119,7 +119,7 @@
                         </div>
                         <div class="main-message-list chat-scroll">
                             <a href="#" class="p-3 d-flex border-bottom">
-                                {{-- <div class="drop-img cover-image"
+                                <div class="drop-img cover-image"
                                     data-image-src="{{ URL::asset('assets/img/faces/9.jpg') }}">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
@@ -129,15 +129,17 @@
                                     </div>
                                     <p class="mb-0 desc">Are you ready to pickup your Delivery...</p>
                                     <p class="time mb-0 text-left float-right mr-2 mt-2">Feb 25 10:35 AM</p>
-                                </div> --}}
+                                </div>
                                 قيد التطوير...
                             </a>
                         </div>
-                        {{-- <div class="text-center dropdown-footer">
+                        <div class="text-center dropdown-footer">
                             <a href="text-center">VIEW ALL</a>
-                        </div> --}}
+                        </div>
                     </div>
-                </div>
+                </div> --}}
+
+
                 <div class="dropdown nav-item main-header-notification">
                     <a class="new nav-link" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none"
@@ -207,7 +209,7 @@
                                 src="{{ asset('/defaultAvatar.jpg') }}"></a>
                     @else
                         <a class="profile-user d-flex" href=""><img alt=""
-                                src="{{ asset('Avatars'.'/'. Auth::user()->avatar) }}"></a>
+                                src="{{ asset('Avatars' . '/' . Auth::user()->avatar) }}"></a>
                     @endif
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
@@ -216,7 +218,8 @@
                                     @if (Auth::user()->avatar == null)
                                         <img alt="" src="{{ asset('/defaultAvatar.jpg') }}" class="">
                                     @else
-                                        <img alt="" src="{{ asset('Avatars'.'/'. Auth::user()->avatar) }}" class="">
+                                        <img alt="" src="{{ asset('Avatars' . '/' . Auth::user()->avatar) }}"
+                                            class="">
                                     @endif
                                 </div>
                                 <div class="mr-3 my-auto">

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SectionRequest extends FormRequest
@@ -25,8 +25,7 @@ class SectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'section_name' => 'string|required|max:225|unique:sections',
-
+            'section_name' => 'string|required|max:225|unique:sections,user_id,'.Auth::id(),
         ];
     }
 

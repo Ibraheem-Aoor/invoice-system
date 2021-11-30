@@ -53,8 +53,8 @@ Auth::routes();
             Route::get('/invoices-delete/{id}', 'InvoicesController@destroy')->name('invoice.delete');
             Route::get('/section/{id}', 'InvoicesController@getproducts'); //Ajax Request
             Route::get('/invoice-detailes/{id}', 'InvocieDetailes@index')->name('invoices.detailes.show');
-            Route::get('View_file/{invoice_number}/{file_name}' , 'InvoiceAttachments@openFile')->name('file.sohw');
-            Route::get('download/{invoice_number}/{file_name}' , 'InvoiceAttachments@openFile')->name('file.download');
+            Route::any('View_file/{invoice_number}/{file_name}' , 'InvoiceAttachments@openFile')->name('file.sohw');
+            Route::any('download/{invoice_number}/{file_name}' , 'InvoiceAttachments@downloadFile')->name('file.download');
             Route::post('delete/attachment_id' , 'InvoiceAttachments@delete')->name('attachment.delete');
             Route::post('add_attachment' , 'InvoiceAttachments@store')->name('attachment.store');
             Route::get('/invoices-archived' , 'InvoicesArchive@index');
@@ -66,6 +66,8 @@ Auth::routes();
             Route::get('/invoices-fully-paid' , 'InvocieDetailes@InvoicestFullyPaid');
             Route::get('/invoices-Excel' , 'InvocieDetailes@getExcel')->name('invoice.getExcel');
             Route::post('/test' ,'InvocieDetailes@test')->name('test');
+            Route::any('/delete-all-invoices' ,'InvoicesController@deleteAll')->name('invoice.delete.all');
+            Route::any('/archive-all-invoices' ,'InvoicesArchive@archiveAll')->name('invoice.archive.all');
 
         });
         /* End Invoices Routes */

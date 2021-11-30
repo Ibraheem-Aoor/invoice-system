@@ -10,9 +10,13 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithFormatData;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+
 use App\Models\Section;
-class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
+class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize  ,
     WithStyles , WithStrictNullComparison , WithFormatData
 {//start class
     /**
@@ -20,7 +24,7 @@ class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
     */
 
     /* Start implementing methods */
-    public function headings(): array
+    public function headings():array
     {
         return [
            'رقم الفاتورة' , 'تاريخ الفاتورة',
@@ -35,13 +39,17 @@ class InvoiceExprot implements FromCollection , WithHeadings ,ShouldAutoSize ,
         ],
         ];
     }
+
+
     /* End implementing methods */
 
 
     public function collection()
     {
-        $invoices = Invoices::where('user_id', Auth::id())->get();
+        $invoices = Invoices::where('user_id', Auth::id())->with('section')->get();
         $invoices->makeHidden(['id' , 'created_at' , 'deleted_at' , 'updated_at' ,'user_id' , 'Status']);
+        foreach ($invoices as $i)
+            $i->section->makeHidden(['id', 'description', 'created_at', 'updated_at' , 'user_id']);
         return $invoices;
     }
 }//End Class

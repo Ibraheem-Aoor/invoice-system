@@ -41,16 +41,19 @@ class InvoiceAttachments extends Controller
     /* End Inserting the attachments */
 
 
-    public function openFile($invoice_number , $file_name)
-    {
-        // $files = Storage::disk('public_uploads')->get('/'.$invoice_number.'/'.$file_name);
-        return  asset('Attachments/'.$invoice_number.'/'.$file_name);
-    }
+    // public function openFile($invoice_number , $file_name)
+    // {
+    //     $files = Storage::disk('public_uploads')->get('/'.$invoice_number.'/'.$file_name);
+    //     // return  response()->file('Attachments/'.$invoice_number.'/'.$file_name);
+    // }
 
     public function downloadFile($invoice_number , $file_name)
     {
-        $file = Storage::disk('public_uploads')->getDriver()->getAdapter()->applyPathPrefix($invoice_number,$file_name);
-        return response()->file($file);
+        return  response()->file('Attachments/'.$invoice_number.'/'.$file_name);
+        // $file = Storage::disk('public_uploads').'/'.$invoice_number.'/'.$file_name;
+        // $file = Storage::disk('public_uploads')->getDriver()->getAdapter()->applyPathPrefix($invoice_number,$file_name);
+        return response()->download($file);
+        // $path = Storage::disk('public_uploads').'/'.$invoice_number ;
 
     }
 

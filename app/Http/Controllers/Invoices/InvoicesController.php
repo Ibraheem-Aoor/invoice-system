@@ -14,6 +14,7 @@ use App\Models\InvoiceAttachments;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\IncvoiceAdded;
+use Illuminate\Support\Facades\Schema;
 
 class InvoicesController extends Controller
 {//start Class
@@ -32,7 +33,7 @@ class InvoicesController extends Controller
     public function index()
     {
 
-        $invoices = Invoices::with('section')->get();
+        $invoices = Invoices::where('user_id' , Auth::id())->with('section')->get();
         foreach ($invoices as $i)
             $i->section->makeHidden(['id', 'description', 'created_at', 'updated_at']);
         return view('invoices.invoices-list', compact('invoices'));
@@ -266,6 +267,16 @@ class InvoicesController extends Controller
     {
         $products = DB::table("products")->where("section_id", $id)->pluck("product_name", "id");
         return json_encode($products);
+    }
+
+    /* Deleting All*/
+    public function deleteAll()
+    {
+        Schema::disableForeignKeyConstraints();
+        Invoices::where('user_id', Auth::id())->truncate();
+        session()->flash('allDeleted' ,'تم حذف الفواتير بنجاح');
+        Schema::enableForeignKeyConstraints();
+        return redirect()->back();
     }
 
 }//End Class

@@ -34,8 +34,27 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
-                    <div class="d-flex justify-content-between">
-                        <a class="btn btn-outline-primary btn-block" href="{{ route('invoice.add') }}">اضافة فاتورة</a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @can('اضافة فاتورة')
+                                    <a class="btn btn-primary col-sm-2 mb-1" href="{{ route('invoice.add') }}">اضافة
+                                        فاتورة</a>
+                                @endcan
+
+                                <a class="btn btn-primary col-sm-2  mb-1" href="{{ route('invoice.getExcel') }}">طباعة
+                                    اكسل</a>
+
+                                <a class="btn btn-danger col-sm-2  mb-1" id="formSubmittion" style="cursor: pointer"
+                                    href="{{ route('invoice.delete.all') }}">
+                                    حذف الكل
+                                </a>
+                                <a class="btn btn-warning col-sm-2  mb-1" id="formSubmittion" style="cursor: pointer"
+                                    href="{{ route('invoice.archive.all') }}">
+                                    أرشفة الكل
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

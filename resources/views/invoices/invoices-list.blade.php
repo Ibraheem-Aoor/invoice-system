@@ -31,7 +31,14 @@
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session()->get('delete') }}
             </div>
-
+        @elseif(session()->has('allDeleted'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session()->get('allDeleted') }}
+            </div>
+        @elseif(session()->has('allArchived'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session()->get('allArchived') }}
+            </div>
         @endif
     </div>
 @endsection
@@ -53,10 +60,12 @@
                                 <a class="btn btn-primary col-sm-2  mb-1" href="{{ route('invoice.getExcel') }}">طباعة
                                     اكسل</a>
 
-                                <a class="btn btn-danger col-sm-2  mb-1" id="formSubmittion">
+                                <a class="btn btn-danger col-sm-2  mb-1" id="formSubmittion" style="cursor: pointer"
+                                    href="{{ route('invoice.delete.all') }}">
                                     حذف الكل
                                 </a>
-                                <a class="btn btn-warning col-sm-2  mb-1" id="formSubmittion">
+                                <a class="btn btn-warning col-sm-2  mb-1" id="formSubmittion" style="cursor: pointer"
+                                    href="{{ route('invoice.archive.all') }}">
                                     أرشفة الكل
                                 </a>
                             </div>

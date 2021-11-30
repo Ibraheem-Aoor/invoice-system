@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Invoices;
 use App\Http\Controllers\Controller;
 use App\Models\Invoices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoicesArchive extends Controller
 {//Start Class
@@ -29,6 +30,13 @@ class InvoicesArchive extends Controller
         $target->restore();
         return redirect()->back();
 
+    }
+
+    public function archiveAll()
+    {
+        Invoices::where('user_id',Auth::id())->delete(); //soft
+        session()->flash('allArchived' ,'تم ارشفة الفواتير بنجاح');
+        return redirect()->back();
     }
 
 }//End Class
